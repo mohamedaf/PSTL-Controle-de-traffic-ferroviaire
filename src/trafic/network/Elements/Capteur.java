@@ -22,5 +22,9 @@ public class Capteur {
     public String getType() {
 	return type;
     }
+    
+    public String toString(){
+    	return "Capteur "+id+" type "+type;
+    }
 
 }
