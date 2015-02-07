@@ -1,4 +1,4 @@
-package trafic.network;
+package trafic.parser;
 
 import java.io.IOException;
 import java.io.StringReader;

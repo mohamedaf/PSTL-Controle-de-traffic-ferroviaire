@@ -1,4 +1,4 @@
-package trafic.network;
+package trafic.test;
 
 import java.io.StringReader;
 
@@ -9,7 +9,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-public class Test {
+import trafic.parser.Parser;
+
+public class ParserTest {
 
 	public static void main(String[] args) {
 		try {
