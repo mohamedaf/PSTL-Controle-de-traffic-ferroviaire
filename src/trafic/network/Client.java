@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import trafic.network.Enum.PCFType;
+
 public class Client {
     private Socket socket;
     private String hostAdress;

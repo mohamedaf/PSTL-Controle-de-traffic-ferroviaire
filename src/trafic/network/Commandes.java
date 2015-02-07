@@ -1,5 +1,7 @@
 package trafic.network;
 
+import trafic.network.Enum.PCFType;
+
 public class Commandes {
 
     public static String pcf( int reqid, PCFType type, String content ) {

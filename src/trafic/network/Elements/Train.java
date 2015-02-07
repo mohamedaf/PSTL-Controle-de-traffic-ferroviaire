@@ -1,5 +1,8 @@
 package trafic.network.Elements;
 
+import trafic.network.Enum.TrainAction;
+import trafic.network.Enum.TrainDirection;
+
 public class Train {
 
     private final int id;

@@ -1,5 +1,7 @@
 package trafic.network.Elements;
 
+import trafic.network.Enum.Color;
+
 public class Light {
 
     private final int id;
