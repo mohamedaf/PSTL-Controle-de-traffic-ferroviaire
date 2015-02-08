@@ -2,13 +2,8 @@ package trafic.network.Elements;
 
 public class Capteur {
 
-    private final int id;
-    private final String type;
-
-    public Capteur() {
-	this.id = -1;
-	this.type = "";
-    }
+    private int id;
+    private String type;
 
     public Capteur(int id, String type) {
 	this.id = id;
@@ -22,9 +17,9 @@ public class Capteur {
     public String getType() {
 	return type;
     }
-    
-    public String toString(){
-    	return "Capteur "+id+" type "+type;
+
+    public String toString() {
+	return "Capteur " + id + " type " + type;
     }
 
 }

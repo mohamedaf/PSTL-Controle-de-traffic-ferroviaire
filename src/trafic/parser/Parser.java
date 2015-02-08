@@ -19,8 +19,7 @@ import trafic.network.Elements.Info;
 import trafic.network.Elements.Init;
 import trafic.network.Elements.Light;
 import trafic.network.Elements.Lights;
-import trafic.network.Elements.PcfHello;
-import trafic.network.Elements.PcfStart;
+import trafic.network.Elements.Pcf;
 import trafic.network.Elements.Position;
 import trafic.network.Elements.Scenario;
 import trafic.network.Elements.SensorEdges;
@@ -33,23 +32,17 @@ import trafic.network.Enum.TrainDirection;
 
 public class Parser {
 
-    private final PcfHello pcf;
-    private final PcfStart pcf2;
+    private final Pcf pcf;
 
     public Parser() {
-	pcf = new PcfHello();
-	pcf2 = new PcfStart();
+	pcf = new Pcf();
     }
 
-    public PcfHello getPcf() {
+    public Pcf getPcf() {
 	return pcf;
     }
 
-    public PcfStart getPcf2() {
-	return pcf2;
-    }
-
-    public void parseHello(String xml) {
+    public void parse(String xml) {
 	DocumentBuilder parser;
 	Document document;
 
@@ -57,7 +50,7 @@ public class Parser {
 	    parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 	    document = parser.parse(new InputSource(new StringReader(xml)));
 
-	    parseHelloAnswer(document);
+	    parseAnswer(document);
 	} catch (ParserConfigurationException e) {
 	    e.printStackTrace();
 	} catch (SAXException | IOException e) {
@@ -66,7 +59,7 @@ public class Parser {
 
     }
 
-    public void parseHelloAnswer(final Node n) {
+    private void parseAnswer(final Node n) {
 	int i;
 	NodeList tmp;
 	Element el;
@@ -76,11 +69,14 @@ public class Parser {
 	try {
 	    switch (n.getNodeType()) {
 	    case Node.DOCUMENT_NODE: {
-		parseHelloAnswer(((Document) n).getDocumentElement());
+		final Document d = (Document) n;
+		parseAnswer(d.getDocumentElement());
+
+		break;
 	    }
 	    case Node.ELEMENT_NODE: {
 		final Element e = (Element) n;
-		final String name = e.getTagName();
+		String name = e.getTagName();
 
 		switch (name) {
 		case "pcf": {
@@ -92,13 +88,18 @@ public class Parser {
 
 		    /* appel recursif sur les balises fils de pcf */
 		    for (i = 0; i < tmp.getLength(); i++) {
-			parseHelloAnswer(tmp.item(i));
+			parseAnswer(tmp.item(i));
 		    }
+
+		    break;
 		}
 		case "scenario": {
+		    int t = Integer.parseInt(e.getAttribute("id"));
+
 		    /* Ajouter les attributs de la balise scenario */
-		    pcf.setScenario(new Scenario(Integer.parseInt(e
-			    .getAttribute("id"))));
+		    pcf.setScenario(new Scenario(t));
+
+		    break;
 		}
 		case "topography": {
 		    pcf.setTopography(new Topography());
@@ -107,8 +108,10 @@ public class Parser {
 
 		    /* appel recursif sur les balises fils de topography */
 		    for (i = 0; i < tmp.getLength(); i++) {
-			parseHelloAnswer(tmp.item(i));
+			parseAnswer(tmp.item(i));
 		    }
+
+		    break;
 		}
 		case "sensor-edges": {
 		    tmp = n.getChildNodes();
@@ -122,8 +125,7 @@ public class Parser {
 
 		    el = (Element) tmp.item(1);
 
-		    NodeList tmp2 = el.getChildNodes();
-		    Element ell = (Element) tmp2.item(0);
+		    Element ell = (Element) el.getFirstChild();
 
 		    capteurIn = new Capteur(Integer.parseInt(ell
 			    .getAttribute("id")), ell.getAttribute("type"));
@@ -132,14 +134,15 @@ public class Parser {
 
 		    el = (Element) tmp.item(2);
 
-		    tmp2 = el.getChildNodes();
-		    ell = (Element) tmp2.item(0);
+		    ell = (Element) el.getFirstChild();
 
 		    capteurOut = new Capteur(Integer.parseInt(ell
 			    .getAttribute("id")), ell.getAttribute("type"));
 
 		    pcf.getTopography().addSensorEdges(
 			    new SensorEdges(capteur, capteurIn, capteurOut));
+
+		    break;
 		}
 		case "init": {
 		    pcf.setInit(new Init());
@@ -148,17 +151,21 @@ public class Parser {
 
 		    /* appel recursif sur les balises fils de init */
 		    for (i = 0; i < tmp.getLength(); i++) {
-			parseHelloAnswer(tmp.item(i));
+			parseAnswer(tmp.item(i));
 		    }
+
+		    break;
 		}
 		case "position": {
 		    tmp = n.getChildNodes();
 
+		    /* recuperation de la balise before */
 		    el = (Element) tmp.item(0);
 
-		    before = new Capteur(
-			    Integer.parseInt(el.getAttribute("id")),
-			    el.getAttribute("type"));
+		    Element ell = (Element) el.getFirstChild();
+
+		    before = new Capteur(Integer.parseInt(ell
+			    .getAttribute("id")), ell.getAttribute("type"));
 
 		    el = (Element) tmp.item(1);
 
@@ -188,13 +195,19 @@ public class Parser {
 				TrainDirection.backward);
 		    }
 
+		    /* Balise after */
 		    el = (Element) tmp.item(2);
+
+		    ell = (Element) el.getFirstChild();
+
 		    after = new Capteur(
-			    Integer.parseInt(el.getAttribute("id")),
-			    el.getAttribute("type"));
+			    Integer.parseInt(ell.getAttribute("id")),
+			    ell.getAttribute("type"));
 
 		    pcf.getInit().addPosition(
 			    new Position(before, after, train));
+
+		    break;
 		}
 		case "lights": {
 		    pcf.setLights(new Lights());
@@ -203,73 +216,18 @@ public class Parser {
 
 		    /* appel recursif sur les balises fils de lights */
 		    for (i = 0; i < tmp.getLength(); i++) {
-			parseHelloAnswer(tmp.item(i));
+			parseAnswer(tmp.item(i));
 		    }
+
+		    break;
 		}
 		case "light": {
 		    pcf.getLights().addLight(
 			    new Light(Integer.parseInt(e.getAttribute("id")),
 				    Color.red));
 		    /* Car a ce stade tous les feux sont rouges */
-		}
 
-		default: {
-		    final String msg = "Unknown element name: " + name;
-		    throw new ParseException(msg);
-		}
-		}
-	    }
-	    default: {
-		final String msg = "Unknown node type: " + n.getNodeName();
-		throw new ParseException(msg);
-	    }
-	    }
-
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-    }
-
-    public void parseStart(String xml) {
-	DocumentBuilder parser;
-	Document document;
-
-	try {
-	    parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-	    document = parser.parse(new InputSource(new StringReader(xml)));
-
-	    parseStartAnswer(document);
-	} catch (ParserConfigurationException e) {
-	    e.printStackTrace();
-	} catch (SAXException | IOException e) {
-	    e.printStackTrace();
-	}
-
-    }
-
-    public void parseStartAnswer(final Node n) {
-	NodeList tmp;
-
-	try {
-	    switch (n.getNodeType()) {
-	    case Node.DOCUMENT_NODE: {
-		parseStartAnswer(((Document) n).getDocumentElement());
-	    }
-	    case Node.ELEMENT_NODE: {
-		final Element e = (Element) n;
-		final String name = e.getTagName();
-
-		switch (name) {
-		case "pcf": {
-		    /* Ajouter les attributs de pcf */
-		    pcf2.setReqid(Integer.parseInt(e.getAttribute("reqid")));
-		    pcf2.setType(e.getAttribute("type"));
-
-		    tmp = n.getChildNodes();
-
-		    /* appel recursif sur la balise info */
-		    parseStartAnswer(tmp.item(0));
-
+		    break;
 		}
 		case "info": {
 		    String status = new String(e.getAttribute("status"));
@@ -277,13 +235,15 @@ public class Parser {
 		    String status2 = new String("ko");
 
 		    if (status.equals(status1)) {
-			pcf2.setInfo(new Info(Status.ok, e.getTextContent()));
+			pcf.addInfo(new Info(Status.ok, e.getTextContent()));
 		    } else if (status.equals(status2)) {
-			pcf2.setInfo(new Info(Status.ko, e.getTextContent()));
+			pcf.addInfo(new Info(Status.ko, e.getTextContent()));
 		    } else {
 			throw new ParseException(
 				"status inconnu dans la balise info");
 		    }
+
+		    break;
 		}
 
 		default: {
@@ -291,9 +251,12 @@ public class Parser {
 		    throw new ParseException(msg);
 		}
 		}
+
+		break;
 	    }
 	    default: {
 		final String msg = "Unknown node type: " + n.getNodeName();
+		System.out.println(msg);
 		throw new ParseException(msg);
 	    }
 	    }
@@ -302,5 +265,4 @@ public class Parser {
 	    e.printStackTrace();
 	}
     }
-
 }

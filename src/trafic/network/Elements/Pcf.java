@@ -1,5 +1,7 @@
 package trafic.network.Elements;
 
+import java.util.ArrayList;
+
 public class Pcf {
 
     private int reqid;
@@ -8,6 +10,11 @@ public class Pcf {
     private Topography topography;
     private Init init;
     private Lights lights;
+    private final ArrayList<Info> info;
+
+    public Pcf() {
+	this.info = new ArrayList<Info>();
+    }
 
     public Pcf(int reqid, String type, Scenario scenario,
 	    Topography topography, Init init, Lights lights) {
@@ -17,6 +24,7 @@ public class Pcf {
 	this.topography = topography;
 	this.init = init;
 	this.lights = lights;
+	this.info = new ArrayList<Info>();
     }
 
     public int getReqid() {
@@ -65,5 +73,23 @@ public class Pcf {
 
     public void setLights(Lights lights) {
 	this.lights = lights;
+    }
+
+    public ArrayList<Info> getInfoList() {
+	return info;
+    }
+
+    public void addInfo(Info i) {
+	info.add(i);
+    }
+
+    public Info getInfo(int i) {
+	return info.get(i);
+    }
+
+    public String toString() {
+	return "reqid : " + reqid + "\nType : " + type + "\n"
+		+ scenario.toString() + topography.toString() + init.toString()
+		+ lights.toString();
     }
 }
