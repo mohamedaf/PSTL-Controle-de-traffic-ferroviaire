@@ -1,7 +1,7 @@
-package trafic.Elements;
+package trafic.elements;
 
-import trafic.Enum.TrainAction;
-import trafic.Enum.TrainDirection;
+import trafic.enums.TrainAction;
+import trafic.enums.TrainDirection;
 
 public class Train {
 

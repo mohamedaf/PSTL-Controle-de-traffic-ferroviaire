@@ -1,4 +1,4 @@
-package trafic.Elements;
+package trafic.elements;
 
 public class Scenario {
 
