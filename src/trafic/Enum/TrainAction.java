@@ -1,4 +1,4 @@
-package trafic.network.Enum;
+package trafic.Enum;
 
 public enum TrainAction {
     start, stop;

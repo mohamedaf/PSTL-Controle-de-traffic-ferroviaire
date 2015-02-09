@@ -1,6 +1,6 @@
-package trafic.network.Elements;
+package trafic.Elements;
 
-import trafic.network.Enum.Color;
+import trafic.Enum.Color;
 
 public class Light {
 

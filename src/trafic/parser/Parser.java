@@ -14,21 +14,21 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import trafic.network.Elements.Capteur;
-import trafic.network.Elements.Info;
-import trafic.network.Elements.Init;
-import trafic.network.Elements.Light;
-import trafic.network.Elements.Lights;
-import trafic.network.Elements.Pcf;
-import trafic.network.Elements.Position;
-import trafic.network.Elements.Scenario;
-import trafic.network.Elements.SensorEdges;
-import trafic.network.Elements.Topography;
-import trafic.network.Elements.Train;
-import trafic.network.Enum.Color;
-import trafic.network.Enum.Status;
-import trafic.network.Enum.TrainAction;
-import trafic.network.Enum.TrainDirection;
+import trafic.Elements.Capteur;
+import trafic.Elements.Info;
+import trafic.Elements.Init;
+import trafic.Elements.Light;
+import trafic.Elements.Lights;
+import trafic.Elements.Pcf;
+import trafic.Elements.Position;
+import trafic.Elements.Scenario;
+import trafic.Elements.SensorEdges;
+import trafic.Elements.Topography;
+import trafic.Elements.Train;
+import trafic.Enum.Color;
+import trafic.Enum.Status;
+import trafic.Enum.TrainAction;
+import trafic.Enum.TrainDirection;
 
 public class Parser {
 

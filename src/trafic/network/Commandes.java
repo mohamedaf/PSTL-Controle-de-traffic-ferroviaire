@@ -20,7 +20,7 @@ public class Commandes {
 		}
 		if (content == null)
 			content = "";
-		return s + ">" + content + "</info>";
+		return s + "'>" + content + "</info>";
 	}
 
 	public static String start() {
@@ -43,7 +43,7 @@ public class Commandes {
 	 * @return
 	 */
 	public static String train(int id, boolean action, boolean dir){
-		String s = "<train +action='";
+		String s = "<train id='"+id+"' action='";
 		if(action)
 			s+="start";
 		else
@@ -54,9 +54,7 @@ public class Commandes {
 		else
 			s+="backward";
 		s+="'/>";
-		return s;
-			
-		
+		return s;		
 	}
 
 }

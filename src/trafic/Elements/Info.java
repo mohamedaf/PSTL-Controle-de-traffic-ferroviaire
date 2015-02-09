@@ -1,6 +1,6 @@
-package trafic.network.Elements;
+package trafic.Elements;
 
-import trafic.network.Enum.Status;
+import trafic.Enum.Status;
 
 public class Info {
 

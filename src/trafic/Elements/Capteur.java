@@ -1,4 +1,4 @@
-package trafic.network.Elements;
+package trafic.Elements;
 
 public class Capteur {
 
