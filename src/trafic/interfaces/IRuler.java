@@ -1,7 +1,7 @@
 package trafic.interfaces;
 
 public interface IRuler {
-	
-	public void up(int sensorId);
+
+    public void up(int sensorId);
 
 }

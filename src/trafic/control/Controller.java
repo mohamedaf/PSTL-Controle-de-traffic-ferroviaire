@@ -11,39 +11,39 @@ import trafic.parser.Parser;
 import trafic.retransmit.Retransmit;
 
 public class Controller implements IController {
-	ICommunicator communicator;
-	IRuler ruler;
-	Parser parser;
-	Pcf circuit;
+    ICommunicator communicator;
+    IRuler ruler;
+    Parser parser;
+    Pcf circuit;
 
-	public Controller(IRuler ruler) {
-		this.communicator = new Retransmit();
-		this.ruler = ruler;
-		parser = new Parser();
-	}
+    public Controller(IRuler ruler) {
+	this.communicator = new Retransmit();
+	this.ruler = ruler;
+	parser = new Parser();
+    }
 
-	@Override
-	public void setTrain(int id, TrainAction action, TrainDirection direction) {
-		// TODO Auto-generated method stub
+    @Override
+    public void setTrain(int id, TrainAction action, TrainDirection direction) {
+	// TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void setLight(int id, Color color) {
-		// TODO Auto-generated method stub
+    @Override
+    public void setLight(int id, Color color) {
+	// TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
+    @Override
+    public void init() {
+	// TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
+    @Override
+    public void start() {
+	// TODO Auto-generated method stub
 
-	}
+    }
 
 }

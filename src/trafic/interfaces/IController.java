@@ -6,12 +6,12 @@ import trafic.enums.TrainDirection;
 
 public interface IController {
 
-	public void setTrain(int id, TrainAction action, TrainDirection direction);
+    public void setTrain(int id, TrainAction action, TrainDirection direction);
 
-	public void setLight(int id, Color color);
-	
-	public void init();
-	
-	public void start();
+    public void setLight(int id, Color color);
+
+    public void init();
+
+    public void start();
 
 }
