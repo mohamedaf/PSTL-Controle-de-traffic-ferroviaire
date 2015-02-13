@@ -14,7 +14,6 @@ public class RulerScen0 implements IUpNotifier {
 	@Override
 	public void notifyUp(int sensorId) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

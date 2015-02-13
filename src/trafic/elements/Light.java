@@ -24,6 +24,7 @@ public class Light {
 	this.color = color;
     }
 
+    @Override
     public String toString() {
 	return "Light : " + id + " color : " + color;
     }

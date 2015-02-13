@@ -12,11 +12,13 @@ public class Controller implements IController {
 	IUpNotifier ruler;
 	CParser parser;
 	Pcf circuit;
+  
 
 	public Controller(IUpNotifier ruler) {
 		this.ruler = ruler;
 		parser = new CParser(this);
 	}
+
 
 	@Override
 	public void setTrain(int id, TrainAction action, TrainDirection direction) {

@@ -11,8 +11,9 @@ public class Scenario {
     public int getId() {
 	return id;
     }
-    
-    public String toString(){
-    	return "Scenario "+id;
+
+    @Override
+    public String toString() {
+	return "Scenario " + id;
     }
 }

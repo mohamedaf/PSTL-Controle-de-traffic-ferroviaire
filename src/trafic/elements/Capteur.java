@@ -18,6 +18,7 @@ public class Capteur {
 	return type;
     }
 
+    @Override
     public String toString() {
 	return "Capteur " + id + " type " + type;
     }
