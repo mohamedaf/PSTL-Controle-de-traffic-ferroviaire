@@ -1,25 +1,21 @@
 package trafic.control;
 
+import trafic.cparser.CParser;
 import trafic.elements.Pcf;
 import trafic.enums.Color;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
-import trafic.interfaces.ICommunicator;
 import trafic.interfaces.IController;
-import trafic.interfaces.IRuler;
-import trafic.parser.Parser;
-import trafic.retransmit.Retransmit;
+import trafic.interfaces.IUpNotifier;
 
 public class Controller implements IController {
-	ICommunicator communicator;
-	IRuler ruler;
-	Parser parser;
+	IUpNotifier ruler;
+	CParser parser;
 	Pcf circuit;
 
-	public Controller(IRuler ruler) {
-		this.communicator = new Retransmit();
+	public Controller(IUpNotifier ruler) {
 		this.ruler = ruler;
-		parser = new Parser();
+		parser = new CParser(this);
 	}
 
 	@Override
@@ -44,6 +40,18 @@ public class Controller implements IController {
 	public void start() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Pcf getPCF() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPCF() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

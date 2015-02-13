@@ -1,9 +1,15 @@
 package trafic.network;
 
 import trafic.interfaces.ICommunicator;
+import trafic.interfaces.IParser;
 
 public class SocketCommunicator implements ICommunicator {
 	private ClientThread ct;
+	private IParser parser;
+	
+	public SocketCommunicator(IParser parser){
+		this.parser = parser;
+	}
 
 	public void close() {
 		if (ct != null && ct.isAlive()) {
@@ -25,10 +31,11 @@ public class SocketCommunicator implements ICommunicator {
 		return ct.isAlive() && ct.isConnected();
 	}
 
+	
+	
 	@Override
-	public String getNextMsg() {
-		if (ct != null)
-			return ct.getNextMsg();
-		return null;
+	public void acquit(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

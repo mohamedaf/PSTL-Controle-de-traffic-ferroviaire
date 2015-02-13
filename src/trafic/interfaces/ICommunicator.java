@@ -6,7 +6,7 @@ public interface ICommunicator {
 
 	public void sendMsg(String msg);
 
-	public String getNextMsg();
+	public void acquit(int id);
 
 	public void close();
 }
