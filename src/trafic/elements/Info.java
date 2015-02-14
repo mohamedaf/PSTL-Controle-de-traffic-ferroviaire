@@ -7,17 +7,17 @@ public class Info {
     private Status statuts;
     private String chaine;
 
-    public Info(Status statuts, String chaine) {
-	this.statuts = statuts;
+    public Info(Status status, String chaine) {
+	this.statuts = status;
 	this.chaine = chaine;
     }
 
-    public Status getStatuts() {
+    public Status getStatus() {
 	return statuts;
     }
 
-    public void setStatuts(Status statuts) {
-	this.statuts = statuts;
+    public void setStatus(Status status) {
+	this.statuts = status;
     }
 
     public String getChaine() {

@@ -1,6 +1,7 @@
 package trafic.test;
 
 import trafic.parser.Parser;
+import trafic.parser.PcfToXml;
 
 public class ParserTest {
 
@@ -12,6 +13,12 @@ public class ParserTest {
 	    p.parse(chaine);
 
 	    System.out.println(p.getPcf().toString());
+
+	    PcfToXml pc = new PcfToXml();
+
+	    System.out.println("\n\n Transformation inverse: \n\n");
+
+	    System.out.println(pc.buildXml(p.getPcf()));
 
 	} catch (Exception e) {
 	    e.printStackTrace();
