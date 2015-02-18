@@ -28,7 +28,7 @@ public class SocketCommunicator implements ICommunicator {
 
     @Override
     public boolean connect(String host, int port) {
-	ct = new ClientThread(host, port);
+	ct = new ClientThread(host, port, parser);
 	ct.start();
 	return ct.isAlive() && ct.isConnected();
     }

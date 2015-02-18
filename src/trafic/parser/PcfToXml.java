@@ -2,7 +2,7 @@ package trafic.parser;
 
 import java.util.ArrayList;
 
-import trafic.elements.Capteur;
+import trafic.elements.Sensor;
 import trafic.elements.Info;
 import trafic.elements.Init;
 import trafic.elements.Light;
@@ -76,7 +76,7 @@ public class PcfToXml {
 	return s;
     }
 
-    public static String sensorEdges(Capteur c, Capteur cIn, Capteur cOut) {
+    public static String sensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
 	String s;
 
 	s = capteur(c.getId(), c.getType());
@@ -111,7 +111,7 @@ public class PcfToXml {
 	return s;
     }
 
-    public static String position(Capteur before, Capteur after, Train train) {
+    public static String position(Sensor before, Sensor after, Train train) {
 	String s;
 
 	s = "<position>";

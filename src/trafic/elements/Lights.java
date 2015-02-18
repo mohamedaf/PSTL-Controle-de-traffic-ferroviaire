@@ -17,6 +17,13 @@ public class Lights {
 	return lights.get(i);
     }
 
+    public Light getLightById(int id) {
+	for (Light l : lights)
+	    if (l.getId() == id)
+		return l;
+	return null;
+    }
+
     public ArrayList<Light> getListLights() {
 	return lights;
     }

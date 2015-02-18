@@ -2,37 +2,37 @@ package trafic.elements;
 
 public class SensorEdges {
 
-    private Capteur capteur;
-    private Capteur capteurIn;
-    private Capteur capteurOut;
+    private Sensor capteur;
+    private Sensor capteurIn;
+    private Sensor capteurOut;
 
-    public SensorEdges(Capteur c, Capteur cIn, Capteur cOut) {
+    public SensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
 	capteur = c;
 	capteurIn = cIn;
 	capteurOut = cOut;
     }
 
-    public Capteur getCapteur() {
+    public Sensor getCapteur() {
 	return capteur;
     }
 
-    public void setCapteur(Capteur capteur) {
+    public void setCapteur(Sensor capteur) {
 	this.capteur = capteur;
     }
 
-    public Capteur getCapteurIn() {
+    public Sensor getCapteurIn() {
 	return capteurIn;
     }
 
-    public void setCapteurIn(Capteur capteurIn) {
+    public void setCapteurIn(Sensor capteurIn) {
 	this.capteurIn = capteurIn;
     }
 
-    public Capteur getCapteurOut() {
+    public Sensor getCapteurOut() {
 	return capteurOut;
     }
 
-    public void setCapteurOut(Capteur capteurOut) {
+    public void setCapteurOut(Sensor capteurOut) {
 	this.capteurOut = capteurOut;
     }
 

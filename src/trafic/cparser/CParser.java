@@ -1,5 +1,6 @@
 package trafic.cparser;
 
+import trafic.control.Controller;
 import trafic.cparser.parser.Parser;
 import trafic.cparser.toxml.Commandes;
 import trafic.cparser.toxml.PcfToXml;
@@ -9,7 +10,6 @@ import trafic.enums.Status;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 import trafic.interfaces.ICommunicator;
-import trafic.interfaces.IController;
 import trafic.interfaces.IParser;
 import trafic.interfaces.IToXml;
 import trafic.network.SocketCommunicator;
@@ -19,7 +19,7 @@ public class CParser implements IParser, IToXml {
     private ICommunicator communicator;
     private static int reqid;
 
-    public CParser(IController controller) {
+    public CParser(Controller controller) {
 	parser = new Parser(controller);
 	communicator = new SocketCommunicator(parser);
 	reqid = 0;

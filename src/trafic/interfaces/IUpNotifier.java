@@ -1,7 +1,9 @@
 package trafic.interfaces;
 
 public interface IUpNotifier {
-	
-	public void notifyUp(int sensorId);
+
+    public void notifyInit();
+
+    public void notifyUp(int sensorId);
 
 }

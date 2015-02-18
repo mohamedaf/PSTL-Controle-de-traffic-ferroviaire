@@ -11,12 +11,8 @@ public interface IController {
 
     public void setLight(int id, Color color);
 
-    public void init();
-
-    public void start();
-
     public Pcf getPCF();
 
-    public void setPCF();
+    public void setPCF(Pcf circuit);
 
 }
