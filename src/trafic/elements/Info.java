@@ -4,20 +4,20 @@ import trafic.enums.Status;
 
 public class Info {
 
-    private Status statuts;
+    private Status status;
     private String chaine;
 
-    public Info(Status statuts, String chaine) {
-	this.statuts = statuts;
+    public Info(Status status, String chaine) {
+	this.status = status;
 	this.chaine = chaine;
     }
 
-    public Status getStatuts() {
-	return statuts;
+    public Status getStatus() {
+	return status;
     }
 
-    public void setStatuts(Status statuts) {
-	this.statuts = statuts;
+    public void setStatus(Status status) {
+	this.status = status;
     }
 
     public String getChaine() {

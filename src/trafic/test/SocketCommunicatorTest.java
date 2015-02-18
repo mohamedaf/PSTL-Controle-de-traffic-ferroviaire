@@ -1,8 +1,8 @@
 package trafic.test;
 
 import trafic.cparser.CParser;
+import trafic.cparser.toxml.Commandes;
 import trafic.enums.PCFType;
-import trafic.network.Commandes;
 import trafic.network.SocketCommunicator;
 
 

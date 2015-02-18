@@ -1,28 +1,25 @@
-package trafic.network;
+package trafic.cparser.toxml;
 
 import trafic.enums.PCFType;
+import trafic.enums.Status;
 
 public class Commandes {
 
     public static String pcf(int reqid, PCFType type, String content) {
-	return "<pcf reqid='" + reqid + "' type='" + type + "'>" + content
+	return "<pcf reqid=\"" + reqid + "\" type=\"" + type + "\">" + content
 		+ "</pcf>";
     }
 
     public static String hello(int id) {
-	return "<hello id='" + id + "'/>";
+	return "<hello id=\"" + id + "\"/>";
     }
 
-    public static String info(boolean status, String content) {
-	String s = "<info status='";
-	if (status) {
-	    s += "ok";
-	} else {
-	    s += "ko";
-	}
+    public static String info(Status status, String content) {
+	String s = "<info status=\"";
+	s += status;
 	if (content == null)
 	    content = "";
-	return s + "'>" + content + "</info>";
+	return s + "\">" + content + "</info>";
     }
 
     public static String start() {
@@ -47,17 +44,17 @@ public class Commandes {
      * @return
      */
     public static String train(int id, boolean action, boolean dir) {
-	String s = "<train id='" + id + "' action='";
+	String s = "<train id=\"" + id + "\" action=\"";
 	if (action)
 	    s += "start";
 	else
 	    s += "stop";
-	s += "' dir='";
+	s += "\" dir=\"";
 	if (dir)
 	    s += "forward";
 	else
 	    s += "backward";
-	s += "'/>";
+	s += "\"/>";
 	return s;
     }
 

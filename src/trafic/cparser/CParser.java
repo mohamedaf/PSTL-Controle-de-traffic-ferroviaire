@@ -1,8 +1,10 @@
 package trafic.cparser;
 
 import trafic.cparser.parser.Parser;
-import trafic.cparser.toxml.ToXml;
+import trafic.cparser.toxml.Commandes;
+import trafic.cparser.toxml.PcfToXml;
 import trafic.enums.Color;
+import trafic.enums.PCFType;
 import trafic.enums.Status;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
@@ -13,58 +15,63 @@ import trafic.interfaces.IToXml;
 import trafic.network.SocketCommunicator;
 
 public class CParser implements IParser, IToXml {
-	private IParser parser;
-	private IToXml toXml;
-	private ICommunicator communicator;
+    private IParser parser;
+    private ICommunicator communicator;
+    private static int reqid;
 
-	public CParser(IController controller) {
-		parser = new Parser(controller);
-		communicator = new SocketCommunicator(parser);
-		toXml = new ToXml(communicator);
+    public CParser(IController controller) {
+	parser = new Parser(controller);
+	communicator = new SocketCommunicator(parser);
+	reqid = 0;
+    }
 
-	}
+    @Override
+    public void setTrainToXml(int id, TrainAction action,
+	    TrainDirection direction) {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.set(PcfToXml.train(id, action, direction))));
 
-	@Override
-	public void setTrainToXml(int id, TrainAction action,
-			TrainDirection direction) {
-		toXml.setTrainToXml(id, action, direction);
+    }
 
-	}
+    @Override
+    public void setLightToXml(int id, Color color) {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.set(PcfToXml.light(id, color))));
 
-	@Override
-	public void setLightToXml(int id, Color color) {
-		toXml.setLightToXml(id, color);
+    }
 
-	}
+    @Override
+    public void helloToXml(int id) {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.hello(id)));
 
-	@Override
-	public void helloToXml(int id) {
-		toXml.helloToXml(id);
+    }
 
-	}
+    @Override
+    public void startToXml() {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.start()));
 
-	@Override
-	public void startToXml() {
-		toXml.startToXml();
+    }
 
-	}
+    @Override
+    public void byeToXml() {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.bye()));
 
-	@Override
-	public void byeToXml() {
-		toXml.byeToXml();
+    }
 
-	}
+    @Override
+    public void infoToXml(Status status, String message) {
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.info(status, message)));
 
-	@Override
-	public void infoToXml(Status status, String message) {
-		toXml.infoToXml(status, message);
+    }
 
-	}
+    @Override
+    public void parse(String xml) {
+	parser.parse(xml);
 
-	@Override
-	public void parse(String xml) {
-		parser.parse(xml);
-
-	}
+    }
 
 }
