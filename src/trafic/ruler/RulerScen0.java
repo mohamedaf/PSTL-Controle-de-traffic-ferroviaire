@@ -1,9 +1,9 @@
 package trafic.ruler;
 
 import trafic.interfaces.IController;
-import trafic.interfaces.IRuler;
+import trafic.interfaces.IUpNotifier;
 
-public class RulerScen0 implements IRuler {
+public class RulerScen0 implements IUpNotifier {
     private IController controller;
 
     public RulerScen0(IController controller) {
@@ -12,9 +12,8 @@ public class RulerScen0 implements IRuler {
     }
 
     @Override
-    public void up(int sensorId) {
+    public void notifyUp(int sensorId) {
 	// TODO Auto-generated method stub
-
     }
 
 }

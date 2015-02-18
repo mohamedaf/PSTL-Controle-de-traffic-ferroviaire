@@ -1,5 +1,6 @@
 package trafic.interfaces;
 
+import trafic.elements.Pcf;
 import trafic.enums.Color;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
@@ -13,5 +14,9 @@ public interface IController {
     public void init();
 
     public void start();
+
+    public Pcf getPCF();
+
+    public void setPCF();
 
 }
