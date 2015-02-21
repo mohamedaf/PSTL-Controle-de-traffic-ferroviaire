@@ -42,10 +42,10 @@ public class RulerScen0 implements IRuler {
 
 	/* On récupère le train qui vient d'activer le capteur */
 	for (Position p : controller.getPCF().getInit().getListPositions()) {
-	    ps.print("\n\nid1 : " + p.getAfter().getId() + ",    sensorId : "
+	   /* ps.print("\n\nid1 : " + p.getAfter().getId() + ",    sensorId : "
 		    + sensorId + "\n");
 	    ps.flush();
-
+*/
 	    if (p.getAfter().getId() == sensorId) {
 		pos = p;
 		t = p.getTrain();
