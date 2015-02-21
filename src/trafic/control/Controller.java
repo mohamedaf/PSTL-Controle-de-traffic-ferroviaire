@@ -32,7 +32,7 @@ public class Controller implements IController, IUpNotifier {
 		}
 		ruler.notifyInit();
 
-		// parser.byeToXml();
+		parser.byeToXml();
 	}
 
 	@Override
