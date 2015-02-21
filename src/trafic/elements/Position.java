@@ -10,8 +10,8 @@ public class Position {
     private Train train;
 
     public Position(Sensor before, Sensor after, Train train) {
-	this.before = before;
-	this.after = after;
+	this.before = before.clone();
+	this.after = after.clone();
 	this.train = train;
     }
 
@@ -20,7 +20,7 @@ public class Position {
     }
 
     public void setBefore(Sensor before) {
-	this.before = before;
+	this.before = before.clone();
     }
 
     public Sensor getAfter() {
@@ -28,7 +28,7 @@ public class Position {
     }
 
     public void setAfter(Sensor after) {
-	this.after = after;
+	this.after = after.clone();
     }
 
     public Train getTrain() {

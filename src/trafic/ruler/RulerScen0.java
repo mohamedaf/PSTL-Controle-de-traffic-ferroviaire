@@ -1,5 +1,6 @@
 package trafic.ruler;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import trafic.elements.Light;
@@ -10,7 +11,6 @@ import trafic.enums.Color;
 import trafic.enums.TrainAction;
 import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
-import trafic.interfaces.IUpNotifier;
 
 public class RulerScen0 implements IRuler {
     private IController controller;
@@ -38,19 +38,36 @@ public class RulerScen0 implements IRuler {
 
 	/* Regles 1 et 2 */
 
+	PrintStream ps = new PrintStream(System.out);
+
+	/* On récupère le train qui vient d'activer le capteur */
 	for (Position p : controller.getPCF().getInit().getListPositions()) {
+	    ps.print("\n\nid1 : " + p.getAfter().getId() + ",    sensorId : "
+		    + sensorId + "\n");
+	    ps.flush();
+
 	    if (p.getAfter().getId() == sensorId) {
 		pos = p;
 		t = p.getTrain();
 	    }
 	}
 
+	if (pos == null) {
+	    ps.print("pos NULLLLLL\n");
+	    ps.flush();
+	}
+
+	/* on recupere le train precedent */
 	for (Position p : controller.getPCF().getInit().getListPositions()) {
 	    if (p.getAfter().getId() == pos.getBefore().getId()) {
 		tBefore = p.getTrain();
 	    }
 	}
 
+	/*
+	 * on recupere le feu qui correspond au capteur active et le feu
+	 * precedent
+	 */
 	for (Light l : circuit.getLights().getListLights()) {
 	    if (l.getId() == sensorId) {
 		myLight = l;
@@ -61,6 +78,9 @@ public class RulerScen0 implements IRuler {
 	}
 
 	if (myLight.getColor() == Color.green) {
+	    controller.setTrain(t.getId(), TrainAction.start, t.getDirection(),
+		    false);
+
 	    controller.setLight(myLight.getId(), Color.red);
 
 	    /* Regles 4 et 3 */
@@ -68,11 +88,12 @@ public class RulerScen0 implements IRuler {
 
 	    if (tBefore != null) {
 		controller.setTrain(tBefore.getId(), TrainAction.start,
-			t.getDirection());
+			tBefore.getDirection(), false);
 		controller.setLight(myLightBefore.getId(), Color.red);
 	    }
 	} else {
-	    controller.setTrain(t.getId(), TrainAction.stop, t.getDirection());
+	    controller.setTrain(t.getId(), TrainAction.stop, t.getDirection(),
+		    false);
 	}
 
     }
@@ -113,13 +134,15 @@ public class RulerScen0 implements IRuler {
 	    for (Position p : listPos) {
 		if (p.getAfter().getId() == l.getId()) {
 		    controller.setTrain(p.getTrain().getId(),
-			    TrainAction.start, p.getTrain().getDirection());
+			    TrainAction.start, p.getTrain().getDirection(),
+			    true);
 		}
 	    }
 	}
 
     }
 
+    @Override
     public void setController(IController cont) {
 	this.controller = cont;
 	circuit = controller.getPCF();

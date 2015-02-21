@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import trafic.enums.PCFType;
 import trafic.interfaces.IParser;
 
 public class ClientThread extends Thread {
@@ -41,19 +40,22 @@ public class ClientThread extends Thread {
     @Override
     public synchronized void run() {
 	connect();
+	String msg;
 	System.out.println("Running thread ...");
 	while (running) {
-
-	    try {
-		send(sendArray.take());
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
+	    while (!sendArray.isEmpty()) {
+		try {
+		    msg = sendArray.take();
+		    send(msg);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
 	    }
 
 	    try {
 		readAnswer();
 	    } catch (IOException e) {
-		e.printStackTrace();
+		// e.printStackTrace();
 	    }
 
 	}
@@ -67,7 +69,7 @@ public class ClientThread extends Thread {
 	    System.out.println("Connecting to server on port " + port);
 
 	    socket = new Socket(host, port);
-	    // socket.setSoTimeout(50);
+	    socket.setSoTimeout(100);
 	    System.out.println("Just connected to "
 		    + socket.getRemoteSocketAddress());
 	} catch (UnknownHostException ex) {
@@ -103,7 +105,7 @@ public class ClientThread extends Thread {
     public void sendMsg(String txt) {
 	sendArray.offer(txt);
     }
-    
+
     private String readAnswer() throws IOException {
 	String line = null;
 	if (fromServer == null)
@@ -111,10 +113,10 @@ public class ClientThread extends Thread {
 		    socket.getInputStream()));
 	line = fromServer.readLine();
 	if (line != null) {
-	    receivedArray.offer(line);
+	    // receivedArray.offer(line);
 	    System.out.println(line);
 	    parser.parse(line);
-	}	
+	}
 	return line;
     }
 

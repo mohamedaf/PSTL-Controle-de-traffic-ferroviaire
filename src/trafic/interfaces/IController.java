@@ -7,7 +7,8 @@ import trafic.enums.TrainDirection;
 
 public interface IController {
 
-    public void setTrain(int id, TrainAction action, TrainDirection direction);
+    public void setTrain(int id, TrainAction action, TrainDirection direction,
+	    boolean init);
 
     public void setLight(int id, Color color);
 

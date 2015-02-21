@@ -23,4 +23,9 @@ public class Sensor {
 	return "Capteur " + id + " type " + type;
     }
 
+    @Override
+    public Sensor clone() {
+	return new Sensor(id, type);
+    }
+
 }
