@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import trafic.interfaces.IParser;
+
 public class ClientThread extends Thread {
     private Socket socket;
     private String hostAdress;
@@ -18,13 +20,15 @@ public class ClientThread extends Thread {
     private volatile boolean running = true;
     private LinkedBlockingQueue<String> sendArray;
     private LinkedBlockingQueue<String> receivedArray;
+    private IParser parser;
 
-    public ClientThread(String host, int port) {
+    public ClientThread(String host, int port, IParser parser) {
 	super();
 	this.hostAdress = host;
 	this.port = port;
 	this.sendArray = new LinkedBlockingQueue<String>();
 	this.receivedArray = new LinkedBlockingQueue<String>();
+	this.parser = parser;
     }
 
     public boolean isConnected() {
@@ -36,20 +40,22 @@ public class ClientThread extends Thread {
     @Override
     public synchronized void run() {
 	connect();
+	String msg;
 	System.out.println("Running thread ...");
 	while (running) {
-
 	    while (!sendArray.isEmpty()) {
 		try {
-		    send(sendArray.take());
+		    msg = sendArray.take();
+		    send(msg);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
 	    }
+
 	    try {
 		readAnswer();
 	    } catch (IOException e) {
-		e.printStackTrace();
+		// e.printStackTrace();
 	    }
 
 	}
@@ -63,7 +69,7 @@ public class ClientThread extends Thread {
 	    System.out.println("Connecting to server on port " + port);
 
 	    socket = new Socket(host, port);
-	    // socket.setSoTimeout(50);
+	    socket.setSoTimeout(100);
 	    System.out.println("Just connected to "
 		    + socket.getRemoteSocketAddress());
 	} catch (UnknownHostException ex) {
@@ -107,7 +113,9 @@ public class ClientThread extends Thread {
 		    socket.getInputStream()));
 	line = fromServer.readLine();
 	if (line != null) {
-	    receivedArray.offer(line);
+	    // receivedArray.offer(line);
+	    System.out.println(line);
+	    parser.parse(line);
 	}
 	return line;
     }

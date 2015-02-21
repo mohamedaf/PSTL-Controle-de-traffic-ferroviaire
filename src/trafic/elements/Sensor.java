@@ -1,11 +1,11 @@
 package trafic.elements;
 
-public class Capteur {
+public class Sensor {
 
     private int id;
     private String type;
 
-    public Capteur(int id, String type) {
+    public Sensor(int id, String type) {
 	this.id = id;
 	this.type = type;
     }
@@ -21,6 +21,11 @@ public class Capteur {
     @Override
     public String toString() {
 	return "Capteur " + id + " type " + type;
+    }
+
+    @Override
+    public Sensor clone() {
+	return new Sensor(id, type);
     }
 
 }

@@ -1,31 +1,34 @@
 package trafic.elements;
 
+import trafic.enums.TrainAction;
+import trafic.enums.TrainDirection;
+
 public class Position {
 
-    private Capteur before;
-    private Capteur after;
+    private Sensor before;
+    private Sensor after;
     private Train train;
 
-    public Position(Capteur before, Capteur after, Train train) {
-	this.before = before;
-	this.after = after;
+    public Position(Sensor before, Sensor after, Train train) {
+	this.before = before.clone();
+	this.after = after.clone();
 	this.train = train;
     }
 
-    public Capteur getBefore() {
+    public Sensor getBefore() {
 	return before;
     }
 
-    public void setBefore(Capteur before) {
-	this.before = before;
+    public void setBefore(Sensor before) {
+	this.before = before.clone();
     }
 
-    public Capteur getAfter() {
+    public Sensor getAfter() {
 	return after;
     }
 
-    public void setAfter(Capteur after) {
-	this.after = after;
+    public void setAfter(Sensor after) {
+	this.after = after.clone();
     }
 
     public Train getTrain() {
@@ -34,6 +37,14 @@ public class Position {
 
     public void setTrain(Train train) {
 	this.train = train;
+    }
+
+    public void setTrainDirection(TrainDirection dir) {
+	train.setDirection(dir);
+    }
+
+    public void setTrainAction(TrainAction act) {
+	train.setAction(act);
     }
 
     @Override

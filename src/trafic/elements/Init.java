@@ -22,6 +22,14 @@ public class Init {
 	return positions;
     }
 
+    public Position getPositionByTrainId(int id) {
+	for (Position p : positions) {
+	    if (p.getTrain().getId() == id)
+		return p;
+	}
+	return null;
+    }
+
     @Override
     public String toString() {
 	String s = "";

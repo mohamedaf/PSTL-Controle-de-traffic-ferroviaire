@@ -1,4 +1,4 @@
-package trafic.parser;
+package trafic.cparser.parser;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import trafic.elements.Capteur;
+import trafic.control.Controller;
 import trafic.elements.Info;
 import trafic.elements.Init;
 import trafic.elements.Light;
@@ -22,6 +22,7 @@ import trafic.elements.Lights;
 import trafic.elements.Pcf;
 import trafic.elements.Position;
 import trafic.elements.Scenario;
+import trafic.elements.Sensor;
 import trafic.elements.SensorEdges;
 import trafic.elements.Topography;
 import trafic.elements.Train;
@@ -29,19 +30,23 @@ import trafic.enums.Color;
 import trafic.enums.Status;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
+import trafic.interfaces.IParser;
 
-public class Parser {
-
+public class Parser implements IParser {
     private final Pcf pcf;
+    private Controller controller;
 
-    public Parser() {
+    public Parser(Controller controller) {
 	pcf = new Pcf();
+	this.controller = controller;
+	this.controller.setPCF(pcf);
     }
 
     public Pcf getPcf() {
 	return pcf;
     }
 
+    @Override
     public void parse(String xml) {
 	DocumentBuilder parser;
 	Document document;
@@ -63,7 +68,7 @@ public class Parser {
 	int i;
 	NodeList tmp;
 	Element el;
-	Capteur capteur, capteurIn, capteurOut, before, after;
+	Sensor capteur, capteurIn, capteurOut, before, after;
 	Train train;
 
 	try {
@@ -118,8 +123,9 @@ public class Parser {
 
 		    el = (Element) tmp.item(0);
 
-		    capteur = new Capteur(Integer.parseInt(el
-			    .getAttribute("id")), el.getAttribute("type"));
+		    capteur = new Sensor(
+			    Integer.parseInt(el.getAttribute("id")),
+			    el.getAttribute("type"));
 
 		    /* Balise in */
 
@@ -127,7 +133,7 @@ public class Parser {
 
 		    Element ell = (Element) el.getFirstChild();
 
-		    capteurIn = new Capteur(Integer.parseInt(ell
+		    capteurIn = new Sensor(Integer.parseInt(ell
 			    .getAttribute("id")), ell.getAttribute("type"));
 
 		    /* Balise out */
@@ -136,7 +142,7 @@ public class Parser {
 
 		    ell = (Element) el.getFirstChild();
 
-		    capteurOut = new Capteur(Integer.parseInt(ell
+		    capteurOut = new Sensor(Integer.parseInt(ell
 			    .getAttribute("id")), ell.getAttribute("type"));
 
 		    pcf.getTopography().addSensorEdges(
@@ -164,8 +170,9 @@ public class Parser {
 
 		    Element ell = (Element) el.getFirstChild();
 
-		    before = new Capteur(Integer.parseInt(ell
-			    .getAttribute("id")), ell.getAttribute("type"));
+		    before = new Sensor(
+			    Integer.parseInt(ell.getAttribute("id")),
+			    ell.getAttribute("type"));
 
 		    el = (Element) tmp.item(1);
 
@@ -200,7 +207,7 @@ public class Parser {
 
 		    ell = (Element) el.getFirstChild();
 
-		    after = new Capteur(
+		    after = new Sensor(
 			    Integer.parseInt(ell.getAttribute("id")),
 			    ell.getAttribute("type"));
 
@@ -245,6 +252,22 @@ public class Parser {
 
 		    break;
 		}
+		case "up": {
+		    tmp = n.getChildNodes();
+
+		    /* Notifier pour chaque fils */
+
+		    for (i = 0; i < tmp.getLength(); i++) {
+			parseUp(tmp.item(i));
+		    }
+		    break;
+		}
+		case "olleh": {
+		    break;
+		}
+		case "bye": {
+		    break;
+		}
 
 		default: {
 		    final String msg = "Unknown element name: " + name;
@@ -264,5 +287,86 @@ public class Parser {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+    }
+
+    public void parseUp(Node n) {
+	final Element e = (Element) n;
+	String name = e.getTagName();
+
+	try {
+	    switch (name) {
+	    case "capteur": {
+		/* Notifier controlleur d'un up */
+		controller.notifyUp(Integer.parseInt(e.getAttribute("id")));
+		break;
+	    }
+	    default: {
+		final String msg = "Unknown element name: " + name;
+		throw new ParseException(msg);
+	    }
+	    }
+	} catch (ParseException e1) {
+	    e1.printStackTrace();
+	}
+    }
+
+    /* A voir */
+    public static boolean isOkInfo(String xml) {
+	DocumentBuilder parser;
+	Document document;
+
+	try {
+	    parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	    document = parser.parse(new InputSource(new StringReader(xml)));
+
+	    return parseIsOkInfo(document);
+	} catch (ParserConfigurationException e) {
+	    e.printStackTrace();
+	} catch (SAXException | IOException e) {
+	    e.printStackTrace();
+	}
+
+	return false;
+    }
+
+    public static boolean parseIsOkInfo(Node n) {
+	try {
+	    switch (n.getNodeType()) {
+	    case Node.DOCUMENT_NODE: {
+		final Document d = (Document) n;
+		parseIsOkInfo(d.getDocumentElement());
+
+		break;
+	    }
+	    case Node.ELEMENT_NODE: {
+		final Element e = (Element) n;
+		String name = e.getTagName();
+
+		switch (name) {
+		case "info": {
+		    if (e.getAttribute("status").equalsIgnoreCase("ok"))
+			return true;
+
+		    return false;
+		}
+
+		default: {
+		    final String msg = "Unknown element name: " + name;
+		    throw new ParseException(msg);
+		}
+		}
+	    }
+	    default: {
+		final String msg = "Unknown node type: " + n.getNodeName();
+		System.out.println(msg);
+		throw new ParseException(msg);
+	    }
+	    }
+
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
+	return false;
     }
 }

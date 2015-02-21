@@ -11,7 +11,9 @@ public class Retransmit implements ICommunicator, IRetransmit {
 
     public Retransmit() {
 	this.timeBeforeRetransmit = 500;
-	this.communicator = new SocketCommunicator();
+
+	this.communicator = new SocketCommunicator(null);
+
 	this.retransmitThread = new RetransmitThread(timeBeforeRetransmit,
 		communicator);
 	this.retransmitThread.start();
@@ -19,7 +21,9 @@ public class Retransmit implements ICommunicator, IRetransmit {
 
     public Retransmit(int timeBeforeRetransmit) {
 	this.timeBeforeRetransmit = timeBeforeRetransmit;
-	this.communicator = new SocketCommunicator();
+
+	this.communicator = new SocketCommunicator(null);
+
 	this.retransmitThread = new RetransmitThread(timeBeforeRetransmit,
 		communicator);
 	this.retransmitThread.start();
@@ -39,11 +43,6 @@ public class Retransmit implements ICommunicator, IRetransmit {
     public void sendMsg(String msg) {
 	// TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public String getNextMsg() {
-	return communicator.getNextMsg();
     }
 
     @Override

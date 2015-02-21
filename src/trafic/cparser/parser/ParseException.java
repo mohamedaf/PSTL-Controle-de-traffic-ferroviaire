@@ -1,4 +1,4 @@
-package trafic.parser;
+package trafic.cparser.parser;
 
 public class ParseException extends Exception {
 
