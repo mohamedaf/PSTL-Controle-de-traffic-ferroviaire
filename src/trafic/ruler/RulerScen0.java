@@ -9,9 +9,10 @@ import trafic.elements.Train;
 import trafic.enums.Color;
 import trafic.enums.TrainAction;
 import trafic.interfaces.IController;
+import trafic.interfaces.IRuler;
 import trafic.interfaces.IUpNotifier;
 
-public class RulerScen0 implements IUpNotifier {
+public class RulerScen0 implements IRuler {
     private IController controller;
     private Pcf circuit;
 

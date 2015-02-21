@@ -22,6 +22,7 @@ public class CParser implements IParser, IToXml {
     public CParser(Controller controller) {
 	parser = new Parser(controller);
 	communicator = new SocketCommunicator(parser);
+	communicator.connect("grimau.dynamic-dns.net", 55556);
 	reqid = 0;
     }
 

@@ -1,7 +1,7 @@
 package trafic.interfaces;
 
-public interface IRuler {
+public interface IRuler extends IUpNotifier {
 
-    public void up(int sensorId);
+    public void setController(IController cont);
 
 }

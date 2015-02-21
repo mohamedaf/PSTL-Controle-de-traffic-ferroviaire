@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import trafic.enums.PCFType;
 import trafic.interfaces.IParser;
 
 public class ClientThread extends Thread {
@@ -102,7 +103,7 @@ public class ClientThread extends Thread {
     public void sendMsg(String txt) {
 	sendArray.offer(txt);
     }
-
+    
     private String readAnswer() throws IOException {
 	String line = null;
 	if (fromServer == null)
@@ -111,8 +112,9 @@ public class ClientThread extends Thread {
 	line = fromServer.readLine();
 	if (line != null) {
 	    receivedArray.offer(line);
-	}
-	parser.parse(line);
+	    System.out.println(line);
+	    parser.parse(line);
+	}	
 	return line;
     }
 
