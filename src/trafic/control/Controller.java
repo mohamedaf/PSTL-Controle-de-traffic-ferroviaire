@@ -11,102 +11,114 @@ import trafic.enums.TrainDirection;
 import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
 import trafic.interfaces.IUpNotifier;
+import trafic.interfaces.StartableStoppable;
 
-public class Controller implements IController, IUpNotifier {
-    IUpNotifier ruler;
-    CParser parser;
-    Pcf circuit;
+public class Controller implements IController, IUpNotifier, StartableStoppable {
+	IRuler ruler;
+	CParser parser;
+	Pcf circuit;
 
-    public Controller(IRuler ruler) {
-	this.ruler = ruler;
-	parser = new CParser(this);
-	ruler.setController(this);
+	public Controller(IRuler ruler) {
+		this.ruler = ruler;
 
-	parser.helloToXml(1);
-	parser.startToXml();
-	try {
-	    Thread.sleep(2000);
-	} catch (InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
 	}
-	ruler.notifyInit();
 
-	System.out.println(circuit.getTopography().toString());
-
-	parser.byeToXml();
-    }
-
-    @Override
-    public void setTrain(int id, TrainAction action, TrainDirection direction,
-	    boolean init) {
-	parser.setTrainToXml(id, action, direction);
-	Position p = circuit.getInit().getPositionByTrainId(id);
-	Train t = p.getTrain();
-	t.setAction(action);
-	t.setDirection(direction);
-	if (action == TrainAction.start) {
-	    if (!init) {
+	@Override
+	public void setTrain(int id, TrainAction action, TrainDirection direction,
+			boolean init) {
+		Position p = circuit.getInit().getPositionByTrainId(id);
+		Train t = p.getTrain();
 
 		/*
-		 * System.out.println("Train : " + t.getId() + " before : " +
-		 * p.getBefore() + "after : " + p.getAfter());
+		 * Si l'action demandée est différente de l'état actuel du train, au
+		 * envoie une requete au serveur
 		 */
 
-		p.setBefore(p.getAfter());
-		/*
-		 * mise a jour de la position du train car dans le cas
-		 * NotifyInit on a tojours pas reÃ§u de reponse up on demande
-		 * juste aux trains de demarrer par contre apres le cas Init la
-		 * c'est plus pareil les trains roulent donc on effecture le
-		 * changement de position
-		 */
+		if (action != t.getAction() || direction != t.getDirection())
+			parser.setTrainToXml(id, action, direction);
 
-		for (SensorEdges se : circuit.getTopography()
-			.getSensorEdgesList()) {
-		    if (se.getCapteur().getId() == p.getAfter().getId()) {
-			p.setAfter(se.getCapteurOut());
-			break;
-		    }
+		t.setAction(action);
+		t.setDirection(direction);
+		if (action == TrainAction.start) {
+			if (!init) {
+
+				p.setBefore(p.getAfter());
+				/*
+				 * mise a jour de la position du train car dans le cas
+				 * NotifyInit on a tojours pas reÃ§u de reponse up on demande
+				 * juste aux trains de demarrer par contre apres le cas Init la
+				 * c'est plus pareil les trains roulent donc on effecture le
+				 * changement de position
+				 */
+
+				for (SensorEdges se : circuit.getTopography()
+						.getSensorEdgesList()) {
+					if (se.getCapteur().getId() == p.getAfter().getId()) {
+						p.setAfter(se.getCapteurOut());
+						break;
+					}
+				}
+				System.out.println("Train : " + t.getId() + " before : "
+						+ p.getBefore() + "after : " + p.getAfter());
+			}
 		}
-		System.out.println("Train : " + t.getId() + " before : "
-			+ p.getBefore() + "after : " + p.getAfter());
-	    }
+		/*
+		 * System.out.println("next train : " + id + " capt : " +
+		 * p.getAfter().getId()); System.out.println("setTrain id: " + id +
+		 * " action: " + action + " direction: " + direction);
+		 */
 	}
-	System.out.println("next train : " + id + " capt : "
-		+ p.getAfter().getId());
-	System.out.println("setTrain id: " + id + " action: " + action
-		+ " direction: " + direction);
-    }
 
-    @Override
-    public void setLight(int id, Color color) {
-	parser.setLightToXml(id, color);
-	circuit.getLights().getLightById(id).setColor(color);
-	System.out.println("setLight id: " + id + " color: " + color);
-    }
+	@Override
+	public void setLight(int id, Color color) {
+		parser.setLightToXml(id, color);
+		circuit.getLights().getLightById(id).setColor(color);
+		System.out.println("setLight id: " + id + " color: " + color);
+	}
 
-    @Override
-    public Pcf getPCF() {
-	return circuit;
-    }
+	@Override
+	public Pcf getPCF() {
+		return circuit;
+	}
 
-    @Override
-    public void setPCF(Pcf circuit) {
-	this.circuit = circuit;
+	@Override
+	public void setPCF(Pcf circuit) {
+		this.circuit = circuit;
 
-    }
+	}
 
-    @Override
-    public void notifyInit() {
-	ruler.notifyInit();
+	@Override
+	public void notifyInit() {
+		ruler.notifyInit();
 
-    }
+	}
 
-    @Override
-    public void notifyUp(int sensorId) {
-	ruler.notifyUp(sensorId);
+	@Override
+	public void notifyUp(int sensorId) {
+		ruler.notifyUp(sensorId);
 
-    }
+	}
+
+	@Override
+	public void start() {
+		parser = new CParser(this);
+		ruler.setController(this);
+
+		parser.helloToXml(1);
+		parser.startToXml();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ruler.notifyInit();
+
+	}
+
+	@Override
+	public void stop() {
+		parser.byeToXml();
+	}
 
 }
