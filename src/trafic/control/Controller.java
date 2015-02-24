@@ -11,28 +11,16 @@ import trafic.enums.TrainDirection;
 import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
 import trafic.interfaces.IUpNotifier;
+import trafic.interfaces.StartableStoppable;
 
-public class Controller implements IController, IUpNotifier {
-	IUpNotifier ruler;
+public class Controller implements IController, IUpNotifier, StartableStoppable {
+	IRuler ruler;
 	CParser parser;
 	Pcf circuit;
 
 	public Controller(IRuler ruler) {
 		this.ruler = ruler;
-		parser = new CParser(this);
-		ruler.setController(this);
 
-		parser.helloToXml(1);
-		parser.startToXml();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ruler.notifyInit();
-
-		parser.byeToXml();
 	}
 
 	@Override
@@ -109,6 +97,28 @@ public class Controller implements IController, IUpNotifier {
 	public void notifyUp(int sensorId) {
 		ruler.notifyUp(sensorId);
 
+	}
+
+	@Override
+	public void start() {
+		parser = new CParser(this);
+		ruler.setController(this);
+
+		parser.helloToXml(1);
+		parser.startToXml();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ruler.notifyInit();
+
+	}
+
+	@Override
+	public void stop() {
+		parser.byeToXml();
 	}
 
 }
