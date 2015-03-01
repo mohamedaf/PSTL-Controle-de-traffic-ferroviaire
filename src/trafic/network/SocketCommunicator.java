@@ -22,13 +22,12 @@ public class SocketCommunicator implements ICommunicator {
     public void close() {
 	if (ct != null && ct.isAlive()) {
 	    ct.stopThread();
-	    System.out.println("Socket close");
 	}
     }
 
     @Override
     public void sendMsg(String txt) {
-	if (ct != null){
+	if (ct != null) {
 	    ct.sendMsg(txt);
 	    sentMsg.put(reqid++, txt);
 	}

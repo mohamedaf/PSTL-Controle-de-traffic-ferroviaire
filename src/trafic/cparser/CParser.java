@@ -60,6 +60,8 @@ public class CParser implements IParser, IToXml {
 	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
 		Commandes.bye()));
 
+	communicator.close();
+
     }
 
     @Override

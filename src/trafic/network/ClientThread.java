@@ -57,11 +57,10 @@ public class ClientThread extends Thread {
 	    } catch (IOException e) {
 		// e.printStackTrace();
 	    }
-	    
 
 	}
 	close();
-	System.out.println("Thread close");
+	System.out.println("Connection close");
     }
 
     private void connect() {
