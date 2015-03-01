@@ -24,10 +24,13 @@ import trafic.elements.Position;
 import trafic.elements.Scenario;
 import trafic.elements.Sensor;
 import trafic.elements.SensorEdges;
+import trafic.elements.SwitchEdges;
 import trafic.elements.Topography;
 import trafic.elements.Train;
 import trafic.enums.Color;
 import trafic.enums.Status;
+import trafic.enums.SwitchPos;
+import trafic.enums.SwitchType;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 import trafic.interfaces.IParser;
@@ -147,6 +150,32 @@ public class Parser implements IParser {
 
 		    pcf.getTopography().addSensorEdges(
 			    new SensorEdges(capteur, capteurIn, capteurOut));
+
+		    break;
+		}
+		case "switch-edges": {
+		    SwitchType p;
+
+		    if (e.getAttribute("type").equalsIgnoreCase("1-2"))
+			p = SwitchType._1_2;
+		    else if (e.getAttribute("type").equalsIgnoreCase("2-1"))
+			p = SwitchType._2_1;
+		    else
+			throw new ParseException("SwitchEdges type "
+				+ e.getAttribute("type") + " non reconnu");
+
+		    /*
+		     * On a mis b1 car de toute façon à l'initialisation on le
+		     * modifie donc n'affecte pas
+		     */
+
+		    pcf.getTopography().addSwitchEdges(
+			    new SwitchEdges(Integer.parseInt(e
+				    .getAttribute("id")), p, Integer.parseInt(e
+				    .getAttribute("trunk")), Integer.parseInt(e
+				    .getAttribute("branch0")), Integer
+				    .parseInt(e.getAttribute("branch1")),
+				    SwitchPos.b1));
 
 		    break;
 		}

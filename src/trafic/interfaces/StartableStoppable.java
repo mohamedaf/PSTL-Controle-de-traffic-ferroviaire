@@ -5,15 +5,15 @@ package trafic.interfaces;
  *
  */
 public interface StartableStoppable {
-	
-	/**
-	 * Start
-	 */
-	public void start();
-	
-	/**
-	 * Stop
-	 */
-	public void stop();
+
+    /**
+     * Start
+     */
+    public void start();
+
+    /**
+     * Stop
+     */
+    public void stop();
 
 }

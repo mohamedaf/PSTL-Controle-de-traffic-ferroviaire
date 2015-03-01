@@ -5,11 +5,13 @@ package trafic.interfaces;
  *
  */
 public interface IParser {
-	
-	/**
-	 * Parser du texte
-	 * @param xml Texte xml a parser
-	 */
-	public void parse(String xml);
+
+    /**
+     * Parser du texte
+     * 
+     * @param xml
+     *            Texte xml a parser
+     */
+    public void parse(String xml);
 
 }

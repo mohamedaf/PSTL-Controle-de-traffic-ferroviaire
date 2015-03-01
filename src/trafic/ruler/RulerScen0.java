@@ -38,23 +38,19 @@ public class RulerScen0 implements IRuler {
 
 	/* Regles 1 et 2 */
 
-	PrintStream ps = new PrintStream(System.out);
-
 	/* On récupère le train qui vient d'activer le capteur */
 	for (Position p : controller.getPCF().getInit().getListPositions()) {
-	   /* ps.print("\n\nid1 : " + p.getAfter().getId() + ",    sensorId : "
-		    + sensorId + "\n");
-	    ps.flush();
-*/
 	    if (p.getAfter().getId() == sensorId) {
 		pos = p;
 		t = p.getTrain();
 	    }
 	}
 
+	PrintStream pr = new PrintStream(System.out);
+
 	if (pos == null) {
-	    ps.print("pos NULLLLLL\n");
-	    ps.flush();
+	    pr.print("nuuuuuuuuuuul\n");
+	    pr.flush();
 	}
 
 	/* on recupere le train precedent */
@@ -86,10 +82,14 @@ public class RulerScen0 implements IRuler {
 	    /* Regles 4 et 3 */
 	    controller.setLight(myLightBefore.getId(), Color.green);
 
-	    if (tBefore != null) {
-		controller.setTrain(tBefore.getId(), TrainAction.start,
-			tBefore.getDirection(), false);
-		controller.setLight(myLightBefore.getId(), Color.red);
+	    /* Si il y a un train derriere qui est a l'arret, up */
+	    if (tBefore != null && tBefore.getAction() == TrainAction.stop) {
+		/*
+		 * controller.setTrain(tBefore.getId(), TrainAction.start,
+		 * tBefore.getDirection(), false);
+		 * controller.setLight(myLightBefore.getId(), Color.red);
+		 */
+		notifyUp(myLightBefore.getId());
 	    }
 	} else {
 	    controller.setTrain(t.getId(), TrainAction.stop, t.getDirection(),
