@@ -1,16 +1,10 @@
 package trafic.IHM;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
 import trafic.interfaces.StartableStoppable;
@@ -18,27 +12,21 @@ import trafic.interfaces.StartableStoppable;
 public class IHM {
 	private final StartableStoppable controller;
 	private int numScenario;
+	private CircuitPanel circuitPanel;
 
 	public IHM(StartableStoppable controller) {
 		this.controller = controller;
+		circuitPanel = new CircuitPanel("data/Circuit0.png", "data/Loco.png");
 		init();
 	}
 
 	private void init() {
 		JFrame jFrame = new JFrame();
-		jFrame.setSize(600, 512);
+		jFrame.setSize(600, 600);
 		Box vertBox = Box.createVerticalBox();
 		Box horBox = Box.createHorizontalBox();
 
-		ImageIcon circuit = new ImageIcon("data/Circuit0.png");
-		JLabel circuitLabel = new JLabel(circuit);
-		
-		ImageIcon train = new ImageIcon("data/Loco.png");
-		JLabel trainLabel = new JLabel(train);
-		trainLabel.setSize(50, 50);
-		
-		//horBox.add(trainLabel);
-		horBox.add(circuitLabel);
+		horBox.add(circuitPanel);
 
 		JButton button1 = new JButton("Start");
 		JButton button2 = new JButton("Stop");
@@ -63,9 +51,6 @@ public class IHM {
 
 		vertBox.add(button1);
 		vertBox.add(button2);
-		
-		
-		
 
 		horBox.add(new JSeparator(JSeparator.VERTICAL));
 		horBox.add(vertBox);
@@ -73,6 +58,9 @@ public class IHM {
 		jFrame.add(horBox);
 
 		jFrame.setVisible(true);
+
+		jFrame.setResizable(false);
+		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
