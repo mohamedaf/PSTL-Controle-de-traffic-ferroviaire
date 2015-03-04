@@ -8,7 +8,9 @@ import trafic.elements.Position;
 import trafic.elements.Sensor;
 import trafic.elements.SensorEdges;
 import trafic.elements.SwitchEdges;
+import trafic.enums.Color;
 import trafic.enums.SwitchPos;
+import trafic.enums.TrainAction;
 import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
 
@@ -99,6 +101,20 @@ public class RulerScen1 implements IRuler {
 		    }
 
 		    break;
+		}
+	    }
+	}
+
+	for (Light l : listLights) {
+	    /* Mettre le reste des feux au vert */
+	    controller.setLight(l.getId(), Color.green);
+
+	    /* Demarrer les trains ayant un feu vert devant */
+	    for (Position p : listPos) {
+		if (p.getAfter().getId() == l.getId()) {
+		    controller.setTrain(p.getTrain().getId(),
+			    TrainAction.start, p.getTrain().getDirection(),
+			    true);
 		}
 	    }
 	}
