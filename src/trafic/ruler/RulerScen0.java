@@ -139,7 +139,6 @@ public class RulerScen0 implements IRuler {
 		}
 	    }
 	}
-
     }
 
     @Override

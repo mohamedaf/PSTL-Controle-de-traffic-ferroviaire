@@ -2,12 +2,13 @@ package trafic.interfaces;
 
 import trafic.enums.Color;
 import trafic.enums.Status;
+import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 
 /**
  * @author HK-Lab
- *
+ * 
  */
 public interface IToXml {
 
@@ -28,6 +29,8 @@ public interface IToXml {
      * @param color
      */
     public void setLightToXml(int id, Color color);
+
+    public void setSwitchToXml(int id, SwitchPos pos);
 
     /**
      * Envoie une commande hello au format pcf au serveur

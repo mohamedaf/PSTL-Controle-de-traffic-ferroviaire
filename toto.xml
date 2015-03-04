@@ -1,6 +1,6 @@
 <pcf reqid="1" type="answer">
 	<olleh id="1" />
-	<scenario id="7" />
+	<scenario id="1" />
 	<topography>
 		<sensor-edges>
 			<capteur id="0" type="canton" />
@@ -30,11 +30,11 @@
 		<sensor-edges>
 			<capteur id="3" type="canton" />
 			<in>
-				<capteur id="7" type="canton" />
+				<capteur id="5" type="canton" />
 				<capteur id="2" type="canton" />
 			</in>
 			<out>
-				<capteur id="4" type="canton" />
+				<capteur id="6" type="station" />
 			</out>
 		</sensor-edges>
 		<sensor-edges>
@@ -44,7 +44,15 @@
 			</in>
 			<out>
 				<capteur id="5" type="canton" />
-				<capteur id="8" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="6" type="station" />
+			<in>
+				<capteur id="4" type="canton" />
+			</in>
+			<out>
+				<capteur id="5" type="canton" />
 			</out>
 		</sensor-edges>
 		<sensor-edges>
@@ -53,51 +61,11 @@
 				<capteur id="4" type="canton" />
 			</in>
 			<out>
-				<capteur id="6" type="canton" />
-			</out>
-		</sensor-edges>
-		<sensor-edges>
-			<capteur id="6" type="canton" />
-			<in>
-				<capteur id="5" type="canton" />
-			</in>
-			<out>
-				<capteur id="7" type="canton" />
-			</out>
-		</sensor-edges>
-		<sensor-edges>
-			<capteur id="7" type="canton" />
-			<in>
-				<capteur id="6" type="canton" />
-				<capteur id="9" type="canton" />
-			</in>
-			<out>
 				<capteur id="3" type="canton" />
 			</out>
 		</sensor-edges>
-		<sensor-edges>
-			<capteur id="8" type="canton" />
-			<in>
-				<capteur id="4" type="canton" />
-			</in>
-			<out>
-				<capteur id="9" type="canton" />
-			</out>
-		</sensor-edges>
-		<sensor-edges>
-			<capteur id="9" type="canton" />
-			<in>
-				<capteur id="8" type="canton" />
-			</in>
-			<out>
-				<capteur id="7" type="canton" />
-			</out>
-		</sensor-edges>
-		<switch-edges id="1" type="1-2" trunk="4" branch0="5"
-			branch1="8">
-		</switch-edges>
-		<switch-edges id="2" type="2-1" trunk="7" branch0="6"
-			branch1="9">
+		<switch-edges id="1" type="2-1" trunk="3" branch0="2"
+			branch1="5">
 		</switch-edges>
 	</topography>
 	<init>
@@ -126,9 +94,5 @@
 		<light id="3" color="red" />
 		<light id="4" color="red" />
 		<light id="5" color="red" />
-		<light id="6" color="red" />
-		<light id="7" color="red" />
-		<light id="8" color="red" />
-		<light id="9" color="red" />
 	</lights>
 </pcf>

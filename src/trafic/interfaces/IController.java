@@ -2,6 +2,7 @@ package trafic.interfaces;
 
 import trafic.elements.Pcf;
 import trafic.enums.Color;
+import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 
@@ -11,6 +12,8 @@ public interface IController {
 	    boolean init);
 
     public void setLight(int id, Color color);
+
+    public void setSwitch(int id, SwitchPos pos);
 
     public Pcf getPCF();
 

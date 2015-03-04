@@ -6,6 +6,7 @@ import trafic.elements.Position;
 import trafic.elements.SensorEdges;
 import trafic.elements.Train;
 import trafic.enums.Color;
+import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 import trafic.interfaces.IController;
@@ -119,6 +120,12 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
     @Override
     public void stop() {
 	parser.byeToXml();
+    }
+
+    @Override
+    public void setSwitch(int id, SwitchPos pos) {
+	parser.setSwitchToXml(id, pos);
+
     }
 
 }

@@ -7,6 +7,7 @@ import trafic.cparser.toxml.PcfToXml;
 import trafic.enums.Color;
 import trafic.enums.PCFType;
 import trafic.enums.Status;
+import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 import trafic.interfaces.ICommunicator;
@@ -74,6 +75,18 @@ public class CParser implements IParser, IToXml {
     @Override
     public void parse(String xml) {
 	parser.parse(xml);
+
+    }
+
+    @Override
+    public void setSwitchToXml(int id, SwitchPos pos) {
+	int branch;
+	if (pos == SwitchPos.b0)
+	    branch = 0;
+	else
+	    branch = 1;
+	communicator.sendMsg(Commandes.pcf(reqid++, PCFType.request,
+		Commandes.set(Commandes.switchXml(id, branch))));
 
     }
 

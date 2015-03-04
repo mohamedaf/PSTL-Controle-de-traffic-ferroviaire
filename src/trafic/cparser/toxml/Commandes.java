@@ -58,4 +58,9 @@ public class Commandes {
 	return s;
     }
 
+    public static String switchXml(int id, int branch) {
+	String s = "<switch id=\"" + id + "\" pos=\"" + branch + "\">";
+	return s;
+    }
+
 }
