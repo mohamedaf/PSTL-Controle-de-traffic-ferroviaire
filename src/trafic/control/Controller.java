@@ -124,6 +124,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
     @Override
     public void setSwitch(int id, SwitchPos pos) {
+	circuit.getTopography().getSwitchEdgesById(id).setPos(pos);
 	parser.setSwitchToXml(id, pos);
 
     }

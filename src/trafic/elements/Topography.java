@@ -20,6 +20,15 @@ public class Topography {
 	return SwitchEdgesList.get(i);
     }
 
+    public SwitchEdges getSwitchEdgesById(int id) {
+	for (SwitchEdges se : SwitchEdgesList) {
+	    if (se.getId() == id) {
+		return se;
+	    }
+	}
+	return null;
+    }
+
     public ArrayList<SwitchEdges> getSwitchEdgesList() {
 	return SwitchEdgesList;
     }
@@ -34,6 +43,31 @@ public class Topography {
 
     public ArrayList<SensorEdges> getSensorEdgesList() {
 	return SensorEdgesList;
+    }
+
+    public boolean isPartOfSwitchEdge(int id) {
+	for (SwitchEdges se : SwitchEdgesList) {
+	    if (id == se.getTrunk() || id == se.getBranch0()
+		    || id == se.getBranch1())
+		return true;
+	}
+	return false;
+    }
+
+    public SwitchEdges getSwitchEdgesByBranch(int branchId) {
+	for (SwitchEdges se : SwitchEdgesList) {
+	    if (se.isBranch0(branchId) || se.isBranch1(branchId))
+		return se;
+	}
+	return null;
+    }
+
+    public SwitchEdges getSwitchEdgesByTrunk(int trunkId) {
+	for (SwitchEdges se : SwitchEdgesList) {
+	    if (se.isTrunk(trunkId))
+		return se;
+	}
+	return null;
     }
 
     @Override

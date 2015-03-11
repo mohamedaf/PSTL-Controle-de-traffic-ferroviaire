@@ -27,6 +27,18 @@ public class SwitchEdges {
 	this.pos = pos;
     }
 
+    public boolean isTrunk(int id) {
+	return id == trunk;
+    }
+
+    public boolean isBranch0(int id) {
+	return id == branch0;
+    }
+
+    public boolean isBranch1(int id) {
+	return id == branch1;
+    }
+
     public SwitchPos getPos() {
 	return pos;
     }
