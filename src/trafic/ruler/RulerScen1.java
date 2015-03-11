@@ -10,19 +10,23 @@ import trafic.elements.SensorEdges;
 import trafic.elements.SwitchEdges;
 import trafic.elements.Train;
 import trafic.enums.Color;
+import trafic.enums.SensorType;
 import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
+import trafic.ruler.thread.ReUpThread;
 
 public class RulerScen1 implements IRuler {
     private IController controller;
     private Pcf circuit;
+    private ReUpThread reUpThread;
 
     public RulerScen1(IController controller) {
 	super();
 	this.controller = controller;
 	circuit = controller.getPCF();
+	reUpThread = new ReUpThread(5000, this);
     }
 
     public RulerScen1() {
@@ -136,6 +140,18 @@ public class RulerScen1 implements IRuler {
 		idAfter = pos.getAfter().getId();
 		idBefore = pos.getBefore().getId();
 	    }
+	}
+
+	/* Si le train est sur une station et est en marche, on l'arrête */
+	if (controller.getPCF().getTopography()
+		.getSensorEdgesById(pos.getBefore().getId()).getCapteur()
+		.getType() == SensorType.station
+		&& t.getAction() == TrainAction.start) {
+
+	    controller.setTrain(t.getId(), TrainAction.stop, t.getDirection(),
+		    false);
+	    reUpThread.addReUp(sensorId);
+	    return;
 	}
 
 	/* on recupere le train precedent */

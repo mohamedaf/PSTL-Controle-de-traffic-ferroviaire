@@ -1,20 +1,26 @@
 package trafic.elements;
 
+import trafic.enums.SensorType;
+
 public class Sensor {
 
     private int id;
-    private String type;
+    private SensorType type;
 
     public Sensor(int id, String type) {
 	this.id = id;
-	this.type = type;
+	if (type.equals("canton")) {
+	    this.type = SensorType.canton;
+	} else {
+	    this.type = SensorType.station;
+	}
     }
 
     public int getId() {
 	return id;
     }
 
-    public String getType() {
+    public SensorType getType() {
 	return type;
     }
 
@@ -25,7 +31,7 @@ public class Sensor {
 
     @Override
     public Sensor clone() {
-	return new Sensor(id, type);
+	return new Sensor(id, type.toString());
     }
 
 }
