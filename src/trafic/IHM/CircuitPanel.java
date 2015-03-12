@@ -48,17 +48,6 @@ public class CircuitPanel extends JPanel {
 		g.drawImage(circuit, 0, 0, circuit.getWidth(this),
 				circuit.getHeight(this), this);
 
-		/*
-		 * AffineTransformOp op = new AffineTransformOp(
-		 * AffineTransform.getRotateInstance(Math.toRadians(45),
-		 * train.getWidth(this) / 16, train.getHeight(this) / 16),
-		 * AffineTransformOp.TYPE_BILINEAR);
-		 * 
-		 * g.drawImage(op.filter(toBufferedImage(train), null), trainPosX,
-		 * trainPosY, train.getWidth(this) / 8, train.getHeight(this) / 8,
-		 * this);
-		 */
-
 		g.setColor(light1.getColor());
 		g.fillOval(light1.getX(), light1.getY(), light1.getWidth(),
 				light1.getHeight());
