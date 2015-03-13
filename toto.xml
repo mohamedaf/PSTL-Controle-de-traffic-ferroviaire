@@ -40,7 +40,7 @@
 		<sensor-edges>
 			<capteur id="4" type="canton" />
 			<in>
-				<capteur id="3" type="canton" />
+				<capteur id="6" type="canton" />
 			</in>
 			<out>
 				<capteur id="5" type="canton" />
@@ -49,10 +49,10 @@
 		<sensor-edges>
 			<capteur id="6" type="station" />
 			<in>
-				<capteur id="4" type="canton" />
+				<capteur id="3" type="canton" />
 			</in>
 			<out>
-				<capteur id="5" type="canton" />
+				<capteur id="4" type="canton" />
 			</out>
 		</sensor-edges>
 		<sensor-edges>

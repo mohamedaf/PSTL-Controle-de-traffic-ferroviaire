@@ -79,14 +79,14 @@ public class PcfToXml {
     public static String sensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
 	String s;
 
-	s = capteur(c.getId(), c.getType());
+	s = capteur(c.getId(), c.getType().toString());
 
 	s += "<in>";
-	s += capteur(cIn.getId(), cIn.getType());
+	s += capteur(cIn.getId(), cIn.getType().toString());
 	s += "</in>";
 
 	s += "<out>";
-	s += capteur(cOut.getId(), cOut.getType());
+	s += capteur(cOut.getId(), cOut.getType().toString());
 	s += "</out>";
 
 	return s;
@@ -117,13 +117,13 @@ public class PcfToXml {
 	s = "<position>";
 
 	s += "<before>";
-	s += capteur(before.getId(), before.getType());
+	s += capteur(before.getId(), before.getType().toString());
 	s += "</before>";
 
 	s += train(train.getId(), train.getAction(), train.getDirection());
 
 	s += "<after>";
-	s += capteur(after.getId(), after.getType());
+	s += capteur(after.getId(), after.getType().toString());
 	s += "</after>";
 
 	s += "</position>";
