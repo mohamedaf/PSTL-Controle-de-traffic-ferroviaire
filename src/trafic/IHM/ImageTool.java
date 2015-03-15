@@ -3,6 +3,7 @@ package trafic.IHM;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 /**
@@ -266,12 +267,15 @@ public abstract class ImageTool {
 				.floor(h * cos + w * sin);
 		BufferedImage bimg = toBufferedImage(getEmptyImage(neww, newh));
 		Graphics2D g = bimg.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g.translate((neww - w) / 2, (newh - h) / 2);
 		g.rotate(Math.toRadians(angle), w / 2, h / 2);
 		g.drawRenderedImage(toBufferedImage(img), null);
 		g.dispose();
 		return toImage(bimg);
 	}
+	
 
 	/**
 	 * Makes a color in an Image transparent.

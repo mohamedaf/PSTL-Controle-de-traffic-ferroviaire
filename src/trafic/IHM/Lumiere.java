@@ -7,7 +7,7 @@ public class Lumiere implements LumiereInterface {
 	private int x, y;
 	private int width, height;
 
-	protected Lumiere(Color colorOn, Color colorOff, int x, int y, int width,
+	public Lumiere(Color colorOn, Color colorOff, int x, int y, int width,
 			int height) {
 		this.colorOn = colorOn;
 		this.colorOff = colorOff;
@@ -82,5 +82,23 @@ public class Lumiere implements LumiereInterface {
 		this.colorOff = c;
 
 	}
+
+	@Override
+	public Color getColorOn() {
+		return colorOn;
+	}
+
+	@Override
+	public Color getColorOff() {
+		// TODO Auto-generated method stub
+		return colorOff;
+	}
+
+	@Override
+	public boolean isOn() {
+		return color == colorOn;
+	}
+	
+
 
 }

@@ -11,8 +11,14 @@ public interface LumiereInterface {
 	public void setColorOn(Color c);
 
 	public void setColorOff(Color c);
+	
+	public Color getColorOn();
+
+	public Color getColorOff();
 
 	public Color getColor();
+	
+	public boolean isOn();
 
 	public int getX();
 
