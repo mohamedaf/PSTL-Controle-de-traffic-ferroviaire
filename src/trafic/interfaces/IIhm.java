@@ -9,5 +9,7 @@ public interface IIhm {
 	public void switchLight(int lightId);
 
 	public void notifyUp(int sensorId);
+	
+	public void step(int idTrain);
 
 }

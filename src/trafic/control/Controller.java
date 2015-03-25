@@ -23,8 +23,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	public Controller(IRuler ruler) {
 		this.ruler = ruler;
 	}
-	
-	public void setIhm(IIhm ihm){
+
+	public void setIhm(IIhm ihm) {
 		this.ihm = ihm;
 	}
 
@@ -47,6 +47,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		if (action == TrainAction.start) {
 			if (!init) {
 
+				ihm.step(id);
+
 				p.setBefore(p.getAfter());
 				/*
 				 * mise a jour de la position du train car dans le cas
@@ -67,20 +69,18 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 						+ p.getBefore() + "after : " + p.getAfter());
 			}
 		}
-		/*
-		 * System.out.println("next train : " + id + " capt : " +
-		 * p.getAfter().getId()); System.out.println("setTrain id: " + id +
-		 * " action: " + action + " direction: " + direction);
-		 */
 	}
 
 	@Override
 	public void setLight(int id, Color color) {
-		parser.setLightToXml(id, color);
-		circuit.getLights().getLightById(id).setColor(color);
-		System.out.println("setLight id: " + id + " color: " + color);
-		
-		
+		if (circuit.getLights().getLightById(id).getColor() != color) {
+			ihm.switchLight(id);
+
+			parser.setLightToXml(id, color);
+			circuit.getLights().getLightById(id).setColor(color);
+			System.out.println("setLight id: " + id + " color: " + color);
+
+		}
 	}
 
 	@Override
@@ -96,17 +96,16 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
 	@Override
 	public void notifyInit() {
-		ruler.notifyInit();
-
 		ihm.notifyInit(circuit);
+
+		ruler.notifyInit();
 	}
 
 	@Override
 	public void notifyUp(int sensorId) {
-		ruler.notifyUp(sensorId);
-		
 		ihm.notifyUp(sensorId);
 
+		ruler.notifyUp(sensorId);
 	}
 
 	@Override
@@ -122,6 +121,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		ihm.notifyInit(circuit);
 		ruler.notifyInit();
 
 	}

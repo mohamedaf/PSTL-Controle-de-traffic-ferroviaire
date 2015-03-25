@@ -1,35 +1,20 @@
 package trafic.IHM;
 
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import trafic.elements.Init;
 import trafic.elements.Pcf;
 import trafic.elements.Position;
-import trafic.elements.Sensor;
 import trafic.elements.SensorEdges;
-import trafic.elements.Topography;
-import trafic.elements.Train;
-import trafic.enums.TrainAction;
-import trafic.enums.TrainDirection;
 import trafic.interfaces.ICircuitPanel;
 import trafic.interfaces.IIhm;
-import trafic.interfaces.IUpNotifier;
 import trafic.interfaces.StartableStoppable;
 
 public class IHM implements IIhm {
@@ -86,6 +71,8 @@ public class IHM implements IIhm {
 	}
 
 	private void init0(Pcf circuit) {
+		this.circuit = circuit;
+		
 		ArrayList<SensorEdges> sensorList = circuit.getTopography()
 				.getSensorEdgesList();
 
@@ -103,11 +90,11 @@ public class IHM implements IIhm {
 			int pos = -1;
 			if (sensorIdTab.size() >= 3) {
 				if (p.getAfter().getId() == sensorIdTab.get(0)) {
-					pos = CircuitPanel0.POS_2_0;
+					pos = CircuitPanel0.POS_3_1;
 				} else if (p.getAfter().getId() == sensorIdTab.get(1)) {
-					pos = CircuitPanel0.POS_0_1;
-				} else if (p.getAfter().getId() == sensorIdTab.get(2)) {
 					pos = CircuitPanel0.POS_1_2;
+				} else if (p.getAfter().getId() == sensorIdTab.get(2)) {
+					pos = CircuitPanel0.POS_2_3;
 				} else {
 					System.err
 							.println("Erreur : Position du train inconnue dans le circuit de l'IHM");
@@ -136,7 +123,7 @@ public class IHM implements IIhm {
 		case 0:
 			circuitPanel = new CircuitPanel0("data/Circuit0.png",
 					"data/Loco.png");
-			System.out.println("Scénario 0 IHM ok");
+			System.out.println("\nScénario 0 IHM ok\n");
 			init0(circuit);
 			break;
 		default:
@@ -153,14 +140,21 @@ public class IHM implements IIhm {
 
 	@Override
 	public void notifyUp(int sensorId) {
-		circuitPanel.notifyUp(sensorId);
-		
 		for (Position p : circuit.getInit().getListPositions()) {
 			if (p.getAfter().getId() == sensorId) {
-				circuitPanel.step(p.getTrain().getId());
+				step(p.getTrain().getId());
 				break;
 			}
 		}
+		circuitPanel.notifyUp(sensorId);
+		
+		
+	}
+
+	@Override
+	public void step(int idTrain) {
+		circuitPanel.step(idTrain);
+		System.out.println("step "+idTrain);
 	}
 
 }

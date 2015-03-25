@@ -28,7 +28,7 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 	private int[][] listPosAngle = { { 256, 45, 55, 200, 342, 447 },
 			{ 48, 230, 326, 453, 391, 230 }, { 10, 270, 238, 180, 143, 90 } };
 
-	public final static int POS_0_1 = 1, POS_1_2 = 3, POS_2_0 = 5;
+	public final static int POS_1_2 = 1, POS_2_3 = 3, POS_3_1 = 5;
 
 	public CircuitPanel0(String circuit, String train) {
 		mapPos = new HashMap<Integer, Integer>();
@@ -74,12 +74,12 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 		g.drawImage(circuit, 0, 0, circuit.getWidth(this),
 				circuit.getHeight(this), this);
 
-		Lumiere light0 = mapLight.get(0);
-		Lumiere light1 = mapLight.get(1);
-		Lumiere light2 = mapLight.get(2);
-		Lumiere sensor0 = mapSensor.get(0);
-		Lumiere sensor1 = mapSensor.get(1);
-		Lumiere sensor2 = mapSensor.get(2);
+		Lumiere light0 = mapLight.get(1);
+		Lumiere light1 = mapLight.get(2);
+		Lumiere light2 = mapLight.get(3);
+		Lumiere sensor0 = mapSensor.get(1);
+		Lumiere sensor1 = mapSensor.get(2);
+		Lumiere sensor2 = mapSensor.get(3);
 
 		g.setColor(light0.getColor());
 		g.fillOval(light0.getX(), light0.getY(), light0.getWidth(),
