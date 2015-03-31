@@ -14,6 +14,7 @@ import trafic.elements.SensorEdges;
 import trafic.elements.Topography;
 import trafic.elements.Train;
 import trafic.enums.Color;
+import trafic.enums.SensorType;
 import trafic.enums.Status;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
@@ -92,7 +93,7 @@ public class PcfToXml {
 	return s;
     }
 
-    public static String capteur(int id, String type) {
+    public static String capteur(int id, SensorType type) {
 	return "<capteur id=\"" + id + "\" type=" + type + " />";
     }
 

@@ -1,20 +1,30 @@
 package trafic.elements;
 
+import trafic.enums.SensorType;
+
 public class Sensor {
 
     private int id;
-    private String type;
+    private SensorType type;
 
-    public Sensor(int id, String type) {
+    public Sensor(int id, SensorType type) {
 	this.id = id;
 	this.type = type;
+    }
+    
+    public Sensor(int id, String type) {
+	this.id = id;
+	if(type.equals("canton"))
+		this.type = SensorType.canton;
+	else
+		this.type = SensorType.station;
     }
 
     public int getId() {
 	return id;
     }
 
-    public String getType() {
+    public SensorType getType() {
 	return type;
     }
 

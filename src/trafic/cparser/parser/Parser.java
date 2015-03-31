@@ -125,7 +125,7 @@ public class Parser implements IParser {
 		    tmp = n.getChildNodes();
 
 		    el = (Element) tmp.item(0);
-
+		    
 		    capteur = new Sensor(
 			    Integer.parseInt(el.getAttribute("id")),
 			    el.getAttribute("type"));

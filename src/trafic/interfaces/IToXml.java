@@ -2,6 +2,7 @@ package trafic.interfaces;
 
 import trafic.enums.Color;
 import trafic.enums.Status;
+import trafic.enums.SwitchPos;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
 
@@ -54,4 +55,6 @@ public interface IToXml {
      */
     public void infoToXml(Status status, String message);
 
+    public void setSwitchToXml(int id, SwitchPos pos);
+    	
 }
