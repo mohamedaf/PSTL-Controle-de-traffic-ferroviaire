@@ -1,15 +1,19 @@
 package trafic.elements;
 
+import java.util.ArrayList;
+
 public class SensorEdges {
 
     private Sensor capteur;
-    private Sensor capteurIn;
-    private Sensor capteurOut;
+    private ArrayList<Sensor> capteurIn;
+    private ArrayList<Sensor> capteurOut;
 
     public SensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
 	capteur = c;
-	capteurIn = cIn;
-	capteurOut = cOut;
+	capteurIn = new ArrayList<Sensor>();
+	capteurOut = new ArrayList<Sensor>();
+	capteurIn.add(cIn);
+	capteurOut.add(cOut);
     }
 
     public Sensor getCapteur() {
@@ -21,19 +25,27 @@ public class SensorEdges {
     }
 
     public Sensor getCapteurIn() {
-	return capteurIn;
+	return capteurIn.get(0);
     }
 
     public void setCapteurIn(Sensor capteurIn) {
-	this.capteurIn = capteurIn;
+	this.capteurIn.add(capteurIn);
     }
 
     public Sensor getCapteurOut() {
-	return capteurOut;
+	return capteurOut.get(0);
     }
 
     public void setCapteurOut(Sensor capteurOut) {
-	this.capteurOut = capteurOut;
+	this.capteurOut.add(capteurOut);
+    }
+
+    public ArrayList<Sensor> getCapteurInList() {
+	return capteurIn;
+    }
+
+    public ArrayList<Sensor> getCapteurOutList() {
+	return capteurOut;
     }
 
     @Override
