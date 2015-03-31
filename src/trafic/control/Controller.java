@@ -33,6 +33,9 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 			boolean init) {
 		Position p = circuit.getInit().getPositionByTrainId(id);
 		Train t = p.getTrain();
+		
+		System.out.println("Set train "+t.getId()+" "+action);
+		
 
 		/*
 		 * Si l'action demand�e est diff�rente de l'�tat actuel du train,

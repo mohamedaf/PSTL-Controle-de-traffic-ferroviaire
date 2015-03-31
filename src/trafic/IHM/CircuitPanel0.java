@@ -111,6 +111,9 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 			g.drawImage(train2, listPosAngle[0][posTrain],
 					listPosAngle[1][posTrain], train2.getWidth(this),
 					train2.getHeight(this), this);
+			g.drawString(""+entry.getKey(), listPosAngle[0][posTrain]-10,
+					listPosAngle[1][posTrain]-10);
+			
 		}
 
 	}
@@ -161,7 +164,7 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(4000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
