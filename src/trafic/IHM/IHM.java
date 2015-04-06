@@ -30,7 +30,7 @@ public class IHM implements IIhm {
 
 	public IHM(StartableStoppable controller) {
 		this.controller = controller;
-		circuitPanel = new CircuitPanel0("data/Circuit0.png", "data/Loco.png");
+
 		initPrincipalFrame();
 	}
 
@@ -39,17 +39,17 @@ public class IHM implements IIhm {
 		jFrame.setSize(600, 600);
 		Box vertBox = Box.createVerticalBox();
 		Box horBox = Box.createHorizontalBox();
-		
+
 		final JCheckBox chemin = new JCheckBox("Chemin aléatoire", false);
 		chemin.addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
-				System.out.println("Change : "+chemin.isSelected());
-				
+				System.out.println("Change : " + chemin.isSelected());
+
 			}
 		});
-		
+
 		vertBox.add(chemin);
 
 		JButton button1 = new JButton("Start");
@@ -88,7 +88,7 @@ public class IHM implements IIhm {
 
 	private void init0(Pcf circuit) {
 		this.circuit = circuit;
-		
+
 		ArrayList<SensorEdges> sensorList = circuit.getTopography()
 				.getSensorEdgesList();
 
@@ -97,7 +97,7 @@ public class IHM implements IIhm {
 
 		for (int i = 0; i < sensorList.size(); i++) {
 			sensorIdTab.add(i, sensorList.get(i).getCapteur().getId());
-			
+
 		}
 
 		Collections.sort(sensorIdTab);
@@ -143,6 +143,7 @@ public class IHM implements IIhm {
 			init0(circuit);
 			break;
 		default:
+			circuitPanel = new CircuitPanelBouchon();
 			System.err.println("Erreur : scenario inconnu.");
 			break;
 		}
@@ -163,14 +164,13 @@ public class IHM implements IIhm {
 			}
 		}
 		circuitPanel.notifyUp(sensorId);
-		
-		
+
 	}
 
 	@Override
 	public void step(int idTrain) {
 		circuitPanel.step(idTrain);
-		System.out.println("step "+idTrain);
+		System.out.println("step " + idTrain);
 	}
 
 }

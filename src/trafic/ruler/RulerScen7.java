@@ -27,21 +27,28 @@ public class RulerScen7 implements IRuler {
 
 	private ReUpThread reUpThread;
 
-	protected RulerScen7(IController controller) {
+	public RulerScen7(IController controller) {
 		super();
 		this.controller = controller;
 		this.circuit = controller.getPCF();
 		this.reUpThread = new ReUpThread(5000, this);
 	}
+	
+	public RulerScen7() {
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
+	
+	/* Ca fonctionne, Ne pas toucher, merci :-) */
 	public void notifyInit() {
 		ArrayList<Light> listLights = (ArrayList<Light>) circuit.getLights()
 				.getListLights().clone();
 
 		ArrayList<Position> listPos = (ArrayList<Position>) circuit.getInit()
 				.getListPositions().clone();
+		
+		ArrayList<Light> aMettreAuVert = new ArrayList<Light>();
 
 		/* On utilise HashSet pour qu'il n'y ait pas d'éléments en double */
 		HashSet<Light> lightsAEnlever = new HashSet<Light>();
@@ -50,11 +57,25 @@ public class RulerScen7 implements IRuler {
 			/* On ajoute a cette liste tous les feux precedant un train */
 			lightsAEnlever.addAll(feuxPrecedents(p.getAfter()));
 		}
-		/* Suppression des feux situes derriere un train */
-		listLights.remove(lightsAEnlever);
+		
+		
+		for(Light l : listLights){
+			boolean vert = true;
+			for(Light l2 : lightsAEnlever){
+				if(l.getId() == l2.getId()){
+					vert = false;
+					break;
+				}
+			}
+			if(vert){
+				aMettreAuVert.add(l);
+			}
+		}
+		
+		System.out.println("Il faut enlever : "+lightsAEnlever.size());
 
 		/* Tous les autres feux sont mis au vert */
-		for (Light l : listLights) {
+		for (Light l : aMettreAuVert) {
 			controller.setLight(l.getId(), Color.green);
 		}
 
@@ -65,11 +86,11 @@ public class RulerScen7 implements IRuler {
 			 */
 			if (circuit.getTopography().isPartOfSwitchEdge(
 					p.getBefore().getId())) {
-				/* 2-1 sensor */
+				/* Aiguillage 2-1 */
 				SwitchEdges sw = circuit.getTopography()
 						.getSwitchEdgesByBranch(p.getBefore().getId());
 
-				/* 1-2 sensor */
+				/* Aiguillage 1-2 */
 				if (sw == null) {
 					sw = circuit.getTopography().getSwitchEdgesByTrunk(
 							p.getBefore().getId());
@@ -84,6 +105,8 @@ public class RulerScen7 implements IRuler {
 	}
 
 	@Override
+	
+	/*Pas fini */
 	public void notifyUp(int sensorId) {
 		Position pos = null;
 		Train train = null;
@@ -135,6 +158,7 @@ public class RulerScen7 implements IRuler {
 	@Override
 	public void setController(IController cont) {
 		this.controller = cont;
+		this.circuit = controller.getPCF();
 
 	}
 

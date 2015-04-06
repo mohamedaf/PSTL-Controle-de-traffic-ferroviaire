@@ -20,7 +20,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	CParser parser;
 	Pcf circuit;
 	IIhm ihm;
-	
+
 	boolean randomOneTwoSwitch = true;
 	boolean automaticSwitch = true;
 
@@ -102,6 +102,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
 	@Override
 	public void notifyInit() {
+		
 		ihm.notifyInit(circuit);
 
 		ruler.notifyInit();
@@ -114,20 +115,18 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		ruler.notifyUp(sensorId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see trafic.interfaces.StartableStoppable#start()
+	 */
 	@Override
 	public void start() {
-		parser = new CParser(this);
+		parser = new CParser(this);	
 		ruler.setController(this);
 
 		parser.helloToXml(1);
 		parser.startToXml();
-		/*
-		 * try { Thread.sleep(5000); } catch (InterruptedException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * ihm.notifyInit(circuit); ruler.notifyInit();
-		 */
-
 	}
 
 	@Override
@@ -157,8 +156,5 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	public void setAutomaticSwitch(boolean automaticSwitch) {
 		this.automaticSwitch = automaticSwitch;
 	}
-
-
-
 
 }
