@@ -1,12 +1,16 @@
 package trafic.IHM;
 
+import java.awt.Checkbox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JSeparator;
 
@@ -35,6 +39,18 @@ public class IHM implements IIhm {
 		jFrame.setSize(600, 600);
 		Box vertBox = Box.createVerticalBox();
 		Box horBox = Box.createHorizontalBox();
+		
+		final JCheckBox chemin = new JCheckBox("Chemin aléatoire", false);
+		chemin.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				System.out.println("Change : "+chemin.isSelected());
+				
+			}
+		});
+		
+		vertBox.add(chemin);
 
 		JButton button1 = new JButton("Start");
 		JButton button2 = new JButton("Stop");

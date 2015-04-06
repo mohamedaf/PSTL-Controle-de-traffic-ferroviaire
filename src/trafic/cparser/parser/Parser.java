@@ -98,6 +98,13 @@ public class Parser implements IParser {
 		    for (i = 0; i < tmp.getLength(); i++) {
 			parseAnswer(tmp.item(i));
 		    }
+		    
+		    
+		    Element nod = (Element) tmp.item(0);
+		    if(nod.getTagName().equals("olleh")){
+		    	System.out.println("Notify init !!!!");
+		    	controller.notifyInit();
+		    }
 
 		    break;
 		}

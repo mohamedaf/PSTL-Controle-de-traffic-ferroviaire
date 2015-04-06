@@ -15,6 +15,8 @@ import trafic.interfaces.IController;
 import trafic.interfaces.IRuler;
 
 public class RulerScen0 implements IRuler {
+	private final static int numScen = 0;
+
 	private IController controller;
 	private Pcf circuit;
 	private HashMap<Integer, Boolean> initList;
@@ -163,5 +165,10 @@ public class RulerScen0 implements IRuler {
 	public void setController(IController cont) {
 		this.controller = cont;
 		circuit = controller.getPCF();
+	}
+
+	@Override
+	public int getNumScen() {
+		return numScen;
 	}
 }

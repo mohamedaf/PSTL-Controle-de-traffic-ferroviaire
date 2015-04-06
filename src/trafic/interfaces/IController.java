@@ -8,15 +8,19 @@ import trafic.enums.TrainDirection;
 
 public interface IController {
 
-    public void setTrain(int id, TrainAction action, TrainDirection direction,
-	    boolean init);
+	public void setTrain(int id, TrainAction action, TrainDirection direction,
+			boolean init);
 
-    public void setLight(int id, Color color);
+	public void setLight(int id, Color color);
 
-    public Pcf getPCF();
+	public Pcf getPCF();
 
-    public void setPCF(Pcf circuit);
-    
-    public void setSwitch(int id, SwitchPos pos);
+	public void setPCF(Pcf circuit);
+
+	public void setSwitch(int id, SwitchPos pos);
+
+	public boolean isAutomaticSwitch();
+
+	public boolean isRandomOneTwoSwitch();
 
 }

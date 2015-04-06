@@ -20,6 +20,9 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	CParser parser;
 	Pcf circuit;
 	IIhm ihm;
+	
+	boolean randomOneTwoSwitch = true;
+	boolean automaticSwitch = true;
 
 	public Controller(IRuler ruler) {
 		this.ruler = ruler;
@@ -34,9 +37,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 			boolean init) {
 		Position p = circuit.getInit().getPositionByTrainId(id);
 		Train t = p.getTrain();
-		
-		System.out.println("Set train "+t.getId()+" "+action);
-		
+
+		System.out.println("Set train " + t.getId() + " " + action);
 
 		/*
 		 * Si l'action demand�e est diff�rente de l'�tat actuel du train,
@@ -119,15 +121,12 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
 		parser.helloToXml(1);
 		parser.startToXml();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ihm.notifyInit(circuit);
-		ruler.notifyInit();
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * ihm.notifyInit(circuit); ruler.notifyInit();
+		 */
 
 	}
 
@@ -135,12 +134,31 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	public void stop() {
 		parser.byeToXml();
 	}
-	
-	   @Override
-	    public void setSwitch(int id, SwitchPos pos) {
+
+	@Override
+	public void setSwitch(int id, SwitchPos pos) {
 		circuit.getTopography().getSwitchEdgesById(id).setPos(pos);
 		parser.setSwitchToXml(id, pos);
 
-	    }
+	}
+
+	public boolean isRandomOneTwoSwitch() {
+		return randomOneTwoSwitch;
+	}
+
+	public void setRandomOneTwoSwitch(boolean randomOneTwoSwitch) {
+		this.randomOneTwoSwitch = randomOneTwoSwitch;
+	}
+
+	public boolean isAutomaticSwitch() {
+		return automaticSwitch;
+	}
+
+	public void setAutomaticSwitch(boolean automaticSwitch) {
+		this.automaticSwitch = automaticSwitch;
+	}
+
+
+
 
 }
