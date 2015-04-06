@@ -14,6 +14,7 @@ import trafic.elements.SensorEdges;
 import trafic.elements.Topography;
 import trafic.elements.Train;
 import trafic.enums.Color;
+import trafic.enums.SensorType;
 import trafic.enums.Status;
 import trafic.enums.TrainAction;
 import trafic.enums.TrainDirection;
@@ -79,20 +80,20 @@ public class PcfToXml {
     public static String sensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
 	String s;
 
-	s = capteur(c.getId(), c.getType().toString());
+	s = capteur(c.getId(), c.getType());
 
 	s += "<in>";
-	s += capteur(cIn.getId(), cIn.getType().toString());
+	s += capteur(cIn.getId(), cIn.getType());
 	s += "</in>";
 
 	s += "<out>";
-	s += capteur(cOut.getId(), cOut.getType().toString());
+	s += capteur(cOut.getId(), cOut.getType());
 	s += "</out>";
 
 	return s;
     }
 
-    public static String capteur(int id, String type) {
+    public static String capteur(int id, SensorType type) {
 	return "<capteur id=\"" + id + "\" type=" + type + " />";
     }
 
@@ -117,13 +118,13 @@ public class PcfToXml {
 	s = "<position>";
 
 	s += "<before>";
-	s += capteur(before.getId(), before.getType().toString());
+	s += capteur(before.getId(), before.getType());
 	s += "</before>";
 
 	s += train(train.getId(), train.getAction(), train.getDirection());
 
 	s += "<after>";
-	s += capteur(after.getId(), after.getType().toString());
+	s += capteur(after.getId(), after.getType());
 	s += "</after>";
 
 	s += "</position>";

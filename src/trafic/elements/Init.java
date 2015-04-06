@@ -29,14 +29,14 @@ public class Init {
 	}
 	return null;
     }
-
-    public Position getPositionByAfterSensor(int sensorId) {
-	for (Position p : positions) {
-	    if (p.getAfter().getId() == sensorId) {
-		return p;
-	    }
-	}
-	return null;
+    
+    public Position getPositionByAfterSensor(int sensorId){
+    	for (Position p : positions) {
+    		if(p.getAfter().getId() == sensorId){
+    			return p;
+    		}
+    	}
+    	return null;
     }
 
     public Position getPositionByBeforeSensor(int sensorId) {

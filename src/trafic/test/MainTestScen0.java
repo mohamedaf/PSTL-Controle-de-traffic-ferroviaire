@@ -11,5 +11,6 @@ public class MainTestScen0 {
 	IRuler scenario0 = new RulerScen0();
 	Controller c = new Controller(scenario0);
 	IHM ihm = new IHM(c);
+	c.setIhm(ihm);
     }
 }

@@ -13,10 +13,10 @@ public interface IController {
 
     public void setLight(int id, Color color);
 
-    public void setSwitch(int id, SwitchPos pos);
-
     public Pcf getPCF();
 
     public void setPCF(Pcf circuit);
+    
+    public void setSwitch(int id, SwitchPos pos);
 
 }

@@ -77,7 +77,7 @@ public class CParser implements IParser, IToXml {
 	parser.parse(xml);
 
     }
-
+    
     @Override
     public void setSwitchToXml(int id, SwitchPos pos) {
 	int branch;
