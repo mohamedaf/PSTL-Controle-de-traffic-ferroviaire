@@ -47,6 +47,10 @@ public class ReUpThread extends Thread {
 	public void addReUp(int sensorId) {
 		map.put(sensorId, System.currentTimeMillis());
 	}
+	
+	public boolean isWaiting(int sensorId){
+		return map.containsKey(sensorId);
+	}
 
 	public void stopThread() {
 		running = false;

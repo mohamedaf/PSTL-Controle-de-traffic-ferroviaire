@@ -1,4 +1,4 @@
-<pcf reqid="1" type="answer">
+<pcf reqid="0" type="answer">
 	<olleh id="1" />
 	<scenario id="7" />
 	<topography>
@@ -98,6 +98,9 @@
 		</switch-edges>
 		<switch-edges id="2" type="2-1" trunk="7" branch0="6"
 			branch1="9">
+		</switch-edges>
+		<switch-edges id="3" type="2-1" trunk="3" branch0="7"
+			branch1="2">
 		</switch-edges>
 	</topography>
 	<init>

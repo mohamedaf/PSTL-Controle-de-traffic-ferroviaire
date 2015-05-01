@@ -51,4 +51,10 @@ public class Retransmit implements ICommunicator, IRetransmit {
 
     }
 
+	@Override
+	public boolean connect() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

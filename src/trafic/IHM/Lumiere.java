@@ -6,6 +6,19 @@ public class Lumiere implements LumiereInterface {
 	private Color color, colorOn, colorOff;
 	private int x, y;
 	private int width, height;
+	private int id;
+
+	public Lumiere(Color colorOn, Color colorOff, int x, int y, int width,
+			int height, int id) {
+		this.colorOn = colorOn;
+		this.colorOff = colorOff;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.id = id;
+		this.color = colorOff;
+	}
 
 	public Lumiere(Color colorOn, Color colorOff, int x, int y, int width,
 			int height) {
@@ -98,7 +111,5 @@ public class Lumiere implements LumiereInterface {
 	public boolean isOn() {
 		return color == colorOn;
 	}
-	
-
 
 }

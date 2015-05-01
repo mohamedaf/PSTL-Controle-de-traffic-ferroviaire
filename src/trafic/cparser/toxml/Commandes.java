@@ -59,7 +59,8 @@ public class Commandes {
 	}
 
 	public static String switchXml(int id, int branch) {
-		String s = "<switch id=\"" + id + "\" pos=\"" + branch + "\">";
+		String s = "<switch id=\"" + id + "\" pos=\"" + branch + "\"/>";
+		System.out.println(s);
 		return s;
 	}
 

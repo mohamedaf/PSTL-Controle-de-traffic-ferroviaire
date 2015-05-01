@@ -28,26 +28,25 @@ public class RulerScen7 implements IRuler {
 	private ReUpThread reUpThread;
 
 	public RulerScen7(IController controller) {
-		super();
 		this.controller = controller;
 		this.circuit = controller.getPCF();
-		this.reUpThread = new ReUpThread(5000, this);
 	}
-	
+
 	public RulerScen7() {
+		this.reUpThread = new ReUpThread(5000, this);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	
 	/* Ca fonctionne, Ne pas toucher, merci :-) */
 	public void notifyInit() {
+		reUpThread.start();
 		ArrayList<Light> listLights = (ArrayList<Light>) circuit.getLights()
 				.getListLights().clone();
 
 		ArrayList<Position> listPos = (ArrayList<Position>) circuit.getInit()
 				.getListPositions().clone();
-		
+
 		ArrayList<Light> aMettreAuVert = new ArrayList<Light>();
 
 		/* On utilise HashSet pour qu'il n'y ait pas d'éléments en double */
@@ -57,22 +56,21 @@ public class RulerScen7 implements IRuler {
 			/* On ajoute a cette liste tous les feux precedant un train */
 			lightsAEnlever.addAll(feuxPrecedents(p.getAfter()));
 		}
-		
-		
-		for(Light l : listLights){
+
+		for (Light l : listLights) {
 			boolean vert = true;
-			for(Light l2 : lightsAEnlever){
-				if(l.getId() == l2.getId()){
+			for (Light l2 : lightsAEnlever) {
+				if (l.getId() == l2.getId()) {
 					vert = false;
 					break;
 				}
 			}
-			if(vert){
+			if (vert) {
 				aMettreAuVert.add(l);
 			}
 		}
-		
-		System.out.println("Il faut enlever : "+lightsAEnlever.size());
+
+		System.out.println("Il faut enlever : " + lightsAEnlever.size());
 
 		/* Tous les autres feux sont mis au vert */
 		for (Light l : aMettreAuVert) {
@@ -105,27 +103,44 @@ public class RulerScen7 implements IRuler {
 	}
 
 	@Override
-	
-	/*Pas fini */
-	public void notifyUp(int sensorId) {
+	synchronized public void notifyUp(int sensorId) {
 		Position pos = null;
 		Train train = null;
 		SensorEdges currentSensorEdges = null;
 		Light myLight = null;
-		ArrayList<Light> myLightsBefore = new ArrayList<Light>();
+		ArrayList<Light> myLightsBefore = feuxPrecedents(circuit
+				.getTopography().getSensorEdgesById(sensorId).getCapteur());
+		ArrayList<Position> trainsDerriere = new ArrayList<Position>();
+
+		/* Si le train attend a la station, on ne fait rien */
+		if (reUpThread.isWaiting(sensorId)) {
+			return;
+		}
+
+		if (circuit == null) {
+			System.err.println("circuit null !!!!!!");
+		}
 
 		for (Position p : circuit.getInit().getListPositions()) {
 			if (p.getAfter().getId() == sensorId) {
 				pos = p;
 				train = pos.getTrain();
 				myLight = circuit.getLights().getLightById(sensorId);
-				break;
+			}
+			/*
+			 * Si un train est situé avant le capteur precedant le capteur
+			 * active
+			 */
+			for (Sensor s : circuit.getTopography()
+					.getSensorEdgesById(sensorId).getCapteurInList()) {
+				if (p.getAfter().getId() == s.getId()) {
+					trainsDerriere.add(p);
+				}
 			}
 		}
 
 		currentSensorEdges = circuit.getTopography().getSensorEdgesById(
 				pos.getBefore().getId());
-
 		/*
 		 * Si le train est en etat de marche et est en fin de station, il
 		 * s'arrete.
@@ -142,7 +157,7 @@ public class RulerScen7 implements IRuler {
 		if (myLight != null && myLight.getColor() == Color.red) {
 			controller.setTrain(train.getId(), TrainAction.stop,
 					train.getDirection(), false);
-		} else {
+		} else { /* Si le feu est vert ou qu'il n'y a pas de feu */
 			int aft = pos.getAfter().getId();
 			/* Si le train arrive a un aiguillage */
 			if (circuit.getTopography().isPartOfSwitchEdge(aft)) {
@@ -151,6 +166,26 @@ public class RulerScen7 implements IRuler {
 				if (aiguillage != null)
 					dirigerAiguillage(aiguillage, pos);
 			}
+			/* Le train continue d'avancer */
+			controller.setTrain(train.getId(), TrainAction.start,
+					train.getDirection(), false);
+			/*
+			 * On met le ou les feux precedents (si le train vient de passer un
+			 * aiguillage 2-1) au vert
+			 */
+			for (Light tmpLight : myLightsBefore) {
+				controller.setLight(tmpLight.getId(), Color.green);
+			}
+			/* On met le feu qu'on vient de depasser au rouge */
+			if (myLight != null) {
+				controller.setLight(myLight.getId(), Color.red);
+			}
+			/* Si un train ou plusieurs trains sont a l'arret derriere nous */
+			for (Position p : trainsDerriere) {
+				if (p.getTrain().getAction() == TrainAction.stop)
+					notifyUp(p.getAfter().getId());
+			}
+
 		}
 
 	}
@@ -179,6 +214,7 @@ public class RulerScen7 implements IRuler {
 		for (SensorEdges s : circuit.getTopography().getSensorEdgesList()) {
 			if (s.getCapteur().getId() == sensor.getId()) {
 				se = s;
+				break;
 			}
 		}
 
@@ -224,10 +260,23 @@ public class RulerScen7 implements IRuler {
 
 	private void dirigerAiguillage(SwitchEdges aiguillage, Position pos) {
 		Sensor s = pos.getAfter();
-		if (aiguillage.isBranch0(s.getId()))
+		boolean twoOne = false;
+		if (aiguillage.getType() == SwitchType._2_1) {
+			twoOne = true;
+		}
+		/* Si le train se dirige vers la branche 0 */
+		if (aiguillage.isBranch0(s.getId())) {
 			controller.setSwitch(aiguillage.getId(), SwitchPos.b0);
-		else if (aiguillage.isBranch1(s.getId()))
+			/* On met le feu permettant d'entrer sur l'autre branche au rouge */
+			if (twoOne)
+				controller.setLight(aiguillage.getBranch1(), Color.red);
+		} /* Si le train se dirige vers la branche 1 */
+		else if (aiguillage.isBranch1(s.getId())) {
 			controller.setSwitch(aiguillage.getId(), SwitchPos.b1);
+			/* On met le feu permettant d'entrer sur l'autre branche au rouge */
+			if (twoOne)
+				controller.setLight(aiguillage.getBranch0(), Color.red);
+		}
 	}
 
 }

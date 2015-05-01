@@ -1,6 +1,6 @@
 package trafic.IHM;
 
-import java.awt.Checkbox;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import trafic.elements.Pcf;
@@ -123,9 +124,11 @@ public class IHM implements IIhm {
 		}
 
 		Box horBox = (Box) jFrame.getContentPane().getComponent(0);
-		jFrame.getContentPane().remove(0);
-		horBox.add(circuitPanel.getComponent());
 
+		jFrame.getContentPane().remove(0);
+		JPanel c = circuitPanel.getComponent();
+		c.setAlignmentX(Component.LEFT_ALIGNMENT);
+		horBox.add(c);
 		jFrame.add(horBox);
 
 		jFrame.setVisible(true);
@@ -135,6 +138,7 @@ public class IHM implements IIhm {
 	@Override
 	public void notifyInit(Pcf circuit) {
 		numScenario = circuit.getScenario().getId();
+		this.circuit = circuit;
 		switch (numScenario) {
 		case 0:
 			circuitPanel = new CircuitPanel0("data/Circuit0.png",
@@ -143,10 +147,21 @@ public class IHM implements IIhm {
 			init0(circuit);
 			break;
 		default:
-			circuitPanel = new CircuitPanelBouchon();
+			circuitPanel = new AutomaticCircuitPanel(500, 600, circuit);
 			System.err.println("Erreur : scenario inconnu.");
 			break;
 		}
+
+		Box horBox = (Box) jFrame.getContentPane().getComponent(0);
+		System.out.println("Count ::: "+horBox.getComponentCount());
+		jFrame.getContentPane().remove(0);
+		JPanel c = circuitPanel.getComponent();
+		c.setAlignmentX(Component.LEFT_ALIGNMENT);
+		horBox.add(c);
+		jFrame.add(horBox);
+
+		jFrame.setVisible(true);
+		jFrame.repaint();
 
 	}
 

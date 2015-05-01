@@ -96,11 +96,6 @@ public class RulerScen0 implements IRuler {
 
 				/* Si il y a un train derriere qui est a l'arret, up */
 				if (tBefore != null && tBefore.getAction() == TrainAction.stop) {
-					/*
-					 * controller.setTrain(tBefore.getId(), TrainAction.start,
-					 * tBefore.getDirection(), false);
-					 * controller.setLight(myLightBefore.getId(), Color.red);
-					 */
 					notifyUp(myLightBefore.getId());
 				}
 			}

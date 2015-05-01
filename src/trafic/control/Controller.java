@@ -52,8 +52,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		t.setDirection(direction);
 		if (action == TrainAction.start) {
 			if (!init) {
-
-				ihm.step(id);
+				if (ihm != null)
+					ihm.step(id);
 
 				p.setBefore(p.getAfter());
 				/*
@@ -80,7 +80,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	@Override
 	public void setLight(int id, Color color) {
 		if (circuit.getLights().getLightById(id).getColor() != color) {
-			ihm.switchLight(id);
+			if (ihm != null)
+				ihm.switchLight(id);
 
 			parser.setLightToXml(id, color);
 			circuit.getLights().getLightById(id).setColor(color);
@@ -102,27 +103,24 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
 	@Override
 	public void notifyInit() {
-		
-		ihm.notifyInit(circuit);
+
+		if (ihm != null)
+			ihm.notifyInit(circuit);
 
 		ruler.notifyInit();
 	}
 
 	@Override
 	public void notifyUp(int sensorId) {
-		ihm.notifyUp(sensorId);
+		if (ihm != null)
+			ihm.notifyUp(sensorId);
 
 		ruler.notifyUp(sensorId);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see trafic.interfaces.StartableStoppable#start()
-	 */
 	@Override
 	public void start() {
-		parser = new CParser(this);	
+		parser = new CParser(this);
 		ruler.setController(this);
 
 		parser.helloToXml(1);
@@ -136,6 +134,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 
 	@Override
 	public void setSwitch(int id, SwitchPos pos) {
+		System.out.println("set switch " + id + " to pos " + pos);
 		circuit.getTopography().getSwitchEdgesById(id).setPos(pos);
 		parser.setSwitchToXml(id, pos);
 

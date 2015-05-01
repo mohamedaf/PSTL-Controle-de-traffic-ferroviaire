@@ -21,10 +21,18 @@ public class CParser implements IParser, IToXml {
     private static int reqid;
 
     public CParser(Controller controller) {
+    reqid = 0;
 	parser = new Parser(controller);
 	communicator = new SocketCommunicator(parser);
-	communicator.connect("grimau.dynamic-dns.net", 55558);
-	reqid = 0;
+	communicator.connect("grimau.dynamic-dns.net", 55558);	
+    }
+    
+    public CParser(Controller controller, ICommunicator communicator){
+    	reqid = 0;
+    	this.parser = new Parser(controller);
+    	this.communicator = communicator;
+    	communicator.connect();
+    
     }
 
     @Override

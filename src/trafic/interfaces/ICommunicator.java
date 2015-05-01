@@ -13,6 +13,11 @@ public interface ICommunicator {
      * @return
      */
     public boolean connect(String host, int port);
+    
+    /**
+     * @return
+     */
+    public boolean connect();
 
     /**
      * Envoie un message au serveur auquel on est connecte
