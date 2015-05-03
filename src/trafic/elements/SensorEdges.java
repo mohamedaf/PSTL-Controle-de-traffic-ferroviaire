@@ -2,56 +2,112 @@ package trafic.elements;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author KOBROSLI - AFFES
+ *
+ *         Classe representant la balise SensorEdges
+ */
 public class SensorEdges {
 
-	private Sensor capteur;
-	private ArrayList<Sensor> capteurIn = new ArrayList<Sensor>();
-	private ArrayList<Sensor> capteurOut = new ArrayList<Sensor>();
+    private Sensor capteur;
+    private ArrayList<Sensor> capteurIn = new ArrayList<Sensor>();
+    private ArrayList<Sensor> capteurOut = new ArrayList<Sensor>();
 
-	public SensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
-		capteur = c;
-		if (cIn != null)
-			capteurIn.add(cIn);
-		if (cOut != null)
-			capteurOut.add(cOut);
-	}
+    /**
+     * Constructeur
+     * 
+     * @param c
+     *            : capteur
+     * @param cIn
+     *            : capteur In
+     * @param cOut
+     *            : capteur Out
+     */
+    public SensorEdges(Sensor c, Sensor cIn, Sensor cOut) {
+	capteur = c;
+	if (cIn != null)
+	    capteurIn.add(cIn);
+	if (cOut != null)
+	    capteurOut.add(cOut);
+    }
 
-	public Sensor getCapteur() {
-		return capteur;
-	}
+    /**
+     * 
+     * @return capteur
+     */
+    public Sensor getCapteur() {
+	return capteur;
+    }
 
-	public void setCapteur(Sensor capteur) {
-		this.capteur = capteur;
-	}
+    /**
+     * Modifie le capteur
+     * 
+     * @param capteur
+     *            : nouveau capteur
+     */
+    public void setCapteur(Sensor capteur) {
+	this.capteur = capteur;
+    }
 
-	public Sensor getCapteurIn() {
-		return capteurIn.get(0);
-	}
+    /**
+     * 
+     * @return premier capteur In dans la liste
+     */
+    public Sensor getCapteurIn() {
+	return capteurIn.get(0);
+    }
 
-	public void setCapteurIn(Sensor capteurIn) {
-		this.capteurIn.add(capteurIn);
-	}
+    /**
+     * Ajoute le capteur In a la liste
+     * 
+     * @param capteur
+     *            : nouveau capteur In
+     */
+    public void setCapteurIn(Sensor capteurIn) {
+	this.capteurIn.add(capteurIn);
+    }
 
-	public Sensor getCapteurOut() {
-		return capteurOut.get(0);
-	}
+    /**
+     * 
+     * @return premier capteur Out dans la liste
+     */
+    public Sensor getCapteurOut() {
+	return capteurOut.get(0);
+    }
 
-	public void setCapteurOut(Sensor capteurOut) {
-		this.capteurOut.add(capteurOut);
-	}
+    /**
+     * Ajoute le capteur Out a la liste
+     * 
+     * @param capteur
+     *            : nouveau capteur Out
+     */
+    public void setCapteurOut(Sensor capteurOut) {
+	this.capteurOut.add(capteurOut);
+    }
 
-	public ArrayList<Sensor> getCapteurInList() {
-		return capteurIn;
-	}
+    /**
+     * Retourne la liste de capteurs In
+     * 
+     * @return capteurIn
+     */
+    public ArrayList<Sensor> getCapteurInList() {
+	return capteurIn;
+    }
 
-	public ArrayList<Sensor> getCapteurOutList() {
-		return capteurOut;
-	}
+    /**
+     * Retourne la liste de capteurs Out
+     * 
+     * @return capteurOut
+     */
+    public ArrayList<Sensor> getCapteurOutList() {
+	return capteurOut;
+    }
 
-	@Override
-	public String toString() {
-		return capteurIn.toString() + " - " + capteur.toString() + " - "
-				+ capteurOut.toString();
-	}
+    @Override
+    public String toString() {
+	return capteurIn.toString() + " - " + capteur.toString() + " - "
+		+ capteurOut.toString();
+    }
 
 }

@@ -11,6 +11,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import trafic.interfaces.IParser;
 
+/**
+ * @author KOBROSLI - AFFES
+ * 
+ *         Thread gerant les interactions client/serveur
+ */
 public class ClientThread extends Thread {
     private Socket socket;
     private String hostAdress;
@@ -19,18 +24,31 @@ public class ClientThread extends Thread {
     private BufferedReader fromServer;
     private volatile boolean running = true;
     private LinkedBlockingQueue<String> sendArray;
-    private LinkedBlockingQueue<String> receivedArray;
     private IParser parser;
 
+    /**
+     * Constructeur
+     * 
+     * @param host
+     *            : serverhost
+     * @param port
+     *            : port
+     * @param parser
+     *            : Parser
+     */
     public ClientThread(String host, int port, IParser parser) {
 	super();
 	this.hostAdress = host;
 	this.port = port;
 	this.sendArray = new LinkedBlockingQueue<String>();
-	this.receivedArray = new LinkedBlockingQueue<String>();
 	this.parser = parser;
     }
 
+    /**
+     * Verifie si une connexion est en cours
+     * 
+     * @return true si socket non null false sinon
+     */
     public boolean isConnected() {
 	if (socket != null)
 	    return !socket.isClosed();
@@ -39,6 +57,7 @@ public class ClientThread extends Thread {
 
     @Override
     public synchronized void run() {
+	// Connexion au moniteur (serveur)
 	connect();
 	String msg;
 	System.out.println("Running thread ...");
@@ -46,6 +65,7 @@ public class ClientThread extends Thread {
 	    while (!sendArray.isEmpty()) {
 		try {
 		    msg = sendArray.take();
+		    // envoi du message au moniteur (serveur)
 		    send(msg);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
@@ -53,16 +73,21 @@ public class ClientThread extends Thread {
 	    }
 
 	    try {
+		// recuperation de la reponse du moniteur (serveur)
 		readAnswer();
 	    } catch (IOException e) {
 		// e.printStackTrace();
 	    }
 
 	}
+	// fermeture de la connexion
 	close();
 	System.out.println("Connection close");
     }
 
+    /**
+     * Connexion au moniteur (serveur)
+     */
     private void connect() {
 	try {
 	    InetAddress host = InetAddress.getByName(hostAdress);
@@ -79,6 +104,9 @@ public class ClientThread extends Thread {
 	}
     }
 
+    /**
+     * Deconnexion avec le moniteur (serveur)
+     */
     private void close() {
 	try {
 	    if (toServer != null)
@@ -92,6 +120,12 @@ public class ClientThread extends Thread {
 	System.out.println("Socket close");
     }
 
+    /**
+     * Envoie du message au moniteur (serveur)
+     * 
+     * @param txt
+     *            : message a envoyer
+     */
     private void send(String txt) {
 	try {
 	    if (toServer == null)
@@ -102,10 +136,22 @@ public class ClientThread extends Thread {
 	}
     }
 
+    /**
+     * Ajout du message a la file d'envoi
+     * 
+     * @param txt
+     *            : message a ajouter a la file
+     */
     public void sendMsg(String txt) {
 	sendArray.offer(txt);
     }
 
+    /**
+     * Retourne le message provenant du moniteur (serveur)
+     * 
+     * @return message provenant du moniteur (serveur)
+     * @throws IOException
+     */
     private String readAnswer() throws IOException {
 	String line = null;
 	if (fromServer == null)
@@ -113,28 +159,18 @@ public class ClientThread extends Thread {
 		    socket.getInputStream()));
 	line = fromServer.readLine();
 	if (line != null) {
-	    // receivedArray.offer(line);
 	    System.out.println(line);
 	    parser.parse(line);
 	}
 	return line;
     }
 
+    /**
+     * Methode permettant d'arreter le Thread
+     */
     public void stopThread() {
 	System.out.println("Demande stop recue ...");
 	running = false;
-    }
-
-    public String getNextMsg() {
-	try {
-	    if (!receivedArray.isEmpty())
-		return receivedArray.take();
-	} catch (InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    return null;
-	}
-	return null;
     }
 
 }

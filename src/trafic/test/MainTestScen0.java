@@ -5,6 +5,11 @@ import trafic.control.Controller;
 import trafic.interfaces.IRuler;
 import trafic.ruler.RulerScen0;
 
+/**
+ * @author KOBROSLI - AFFES
+ *
+ *         Classe de test du scenario 0
+ */
 public class MainTestScen0 {
 
     public static void main(String[] args) {

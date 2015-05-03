@@ -1,35 +1,37 @@
 package trafic.interfaces;
 
 /**
- * Interface de connexion a un serveur et envoi de messages
  * @author KOBROSLI - AFFES
  * 
+ *         Interface de connexion a un serveur et envoi de messages
  */
 public interface ICommunicator {
 
     /**
+     * Methode se connectant au serveur
+     * 
      * @param host
+     *            : serverhost
      * @param port
-     * @return
+     *            : port de connexion au serveur
+     * @return true si connection reussie false sinon
      */
     public boolean connect(String host, int port);
-    
+
     /**
-     * @return
+     * Methode se connectant au serveur
+     * 
+     * @return true si connection reussie false sinon
      */
     public boolean connect();
 
     /**
-     * Envoie un message au serveur auquel on est connecte
-     * @param msg texte a envoyer
+     * Envoie d'un message au serveur auquel on est connecte
+     * 
+     * @param msg
+     *            : texte a envoyer
      */
     public void sendMsg(String msg);
-
-    /**
-     * Acquitte un message envoye.
-     * @param id numero du message envoye
-     */
-    public void acquit(int id);
 
     /**
      * Ferme la connexion

@@ -4,28 +4,28 @@ import java.awt.Color;
 
 public interface LumiereInterface {
 
-	public void on();
+    public void on();
 
-	public void off();
+    public void off();
 
-	public void setColorOn(Color c);
+    public void setColorOn(Color c);
 
-	public void setColorOff(Color c);
-	
-	public Color getColorOn();
+    public void setColorOff(Color c);
 
-	public Color getColorOff();
+    public Color getColorOn();
 
-	public Color getColor();
-	
-	public boolean isOn();
+    public Color getColorOff();
 
-	public int getX();
+    public Color getColor();
 
-	public int getY();
+    public boolean isOn();
 
-	public int getWidth();
+    public int getX();
 
-	public int getHeight();
+    public int getY();
+
+    public int getWidth();
+
+    public int getHeight();
 
 }

@@ -5,13 +5,17 @@ import trafic.enums.PCFType;
 import trafic.enums.Status;
 import trafic.network.SocketCommunicator;
 
+/**
+ * @author KOBROSLI - AFFES
+ *
+ *         Classe de test de la socket de communication
+ */
 public class SocketCommunicatorTest {
     public static void main(String[] args) {
 
 	SocketCommunicator n = new SocketCommunicator(null);
 	n.connect("grimau.dynamic-dns.net", 55558);
 	n.sendMsg(Commandes.pcf(1, PCFType.request, Commandes.hello(1)));
-	String g;
 	n.sendMsg(Commandes.pcf(1, PCFType.advise,
 		Commandes.info(Status.ok, "")));
 	/*

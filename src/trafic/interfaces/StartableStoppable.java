@@ -7,12 +7,13 @@ package trafic.interfaces;
 public interface StartableStoppable {
 
     /**
-     * Start
+     * Methode initialisant notre controlleur et demandant le demarrage du
+     * circuit
      */
     public void start();
 
     /**
-     * Stop
+     * Methode arretant le circuit
      */
     public void stop();
 

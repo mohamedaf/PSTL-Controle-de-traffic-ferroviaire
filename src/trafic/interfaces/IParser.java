@@ -7,10 +7,10 @@ package trafic.interfaces;
 public interface IParser {
 
     /**
-     * Parser du texte
+     * Parser du texte xml respectant le DTD de l'ennonce
      * 
      * @param xml
-     *            Texte xml a parser
+     *            : Texte xml a parser
      */
     public void parse(String xml);
 

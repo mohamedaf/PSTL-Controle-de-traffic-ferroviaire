@@ -1,7 +1,7 @@
 package trafic.interfaces;
 
 /**
- * @author HK-Lab
+ * @author KOBROSLI - AFFES
  *
  */
 public interface IUpNotifier {
@@ -13,7 +13,9 @@ public interface IUpNotifier {
 
     /**
      * Notifie qu'un capteur a ete active
-     * @param sensorId Numero du capteur active
+     * 
+     * @param sensorId
+     *            : Numero du capteur active
      */
     public void notifyUp(int sensorId);
 

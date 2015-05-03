@@ -15,24 +15,49 @@ import trafic.interfaces.IParser;
 import trafic.interfaces.IToXml;
 import trafic.network.SocketCommunicator;
 
+/**
+ * Classe parsant les requetes du controller en requetes XML comprehensibles par
+ * le serveur, cette classe s'occupe aussi de l'envois de ces requetes au au
+ * moniteur apres le parse. Elle permet aussi par le biai de sa methode parse de
+ * demander a faire le chemain inverse c'est a dire parser une chaine XML et la
+ * transformer en un objet PCF
+ * 
+ * @author KOBROSLI - AFFES
+ *
+ */
 public class CParser implements IParser, IToXml {
     private IParser parser;
     private ICommunicator communicator;
     private static int reqid;
 
+    /**
+     * Constructeur
+     * 
+     * @param controller
+     *            : instance du composant Controller
+     */
     public CParser(Controller controller) {
-    reqid = 0;
+	reqid = 0;
 	parser = new Parser(controller);
 	communicator = new SocketCommunicator(parser);
-	communicator.connect("grimau.dynamic-dns.net", 55558);	
+	communicator.connect("grimau.dynamic-dns.net", 55558);
     }
-    
-    public CParser(Controller controller, ICommunicator communicator){
-    	reqid = 0;
-    	this.parser = new Parser(controller);
-    	this.communicator = communicator;
-    	communicator.connect();
-    
+
+    /**
+     * Constructeur
+     * 
+     * @param controller
+     *            : instance du composant Controller
+     * @param communicator
+     *            : instance du composant gerant la communication avec le
+     *            moniteur (serveur)
+     */
+    public CParser(Controller controller, ICommunicator communicator) {
+	reqid = 0;
+	this.parser = new Parser(controller);
+	this.communicator = communicator;
+	communicator.connect();
+
     }
 
     @Override
@@ -85,7 +110,7 @@ public class CParser implements IParser, IToXml {
 	parser.parse(xml);
 
     }
-    
+
     @Override
     public void setSwitchToXml(int id, SwitchPos pos) {
 	int branch;
