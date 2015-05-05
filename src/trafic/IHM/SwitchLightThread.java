@@ -23,6 +23,7 @@ public class SwitchLightThread extends Thread {
 		e.printStackTrace();
 	    }
 	    l.switchColor();
+	    panel.repaint();
 	}
     }
 

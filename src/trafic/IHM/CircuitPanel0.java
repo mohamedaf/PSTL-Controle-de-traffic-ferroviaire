@@ -185,10 +185,5 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 	t.start();
     }
 
-    @Override
-    public void addPosition(Position pos) {
-	// TODO Auto-generated method stub
-
-    }
 
 }

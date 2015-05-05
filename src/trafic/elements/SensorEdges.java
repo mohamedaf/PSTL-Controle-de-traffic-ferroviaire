@@ -31,8 +31,20 @@ public class SensorEdges {
 	if (cOut != null)
 	    capteurOut.add(cOut);
     }
+    
+    
 
-    /**
+    public SensorEdges(Sensor capteur, ArrayList<Sensor> capteurIn,
+			ArrayList<Sensor> capteurOut) {
+		super();
+		this.capteur = capteur;
+		this.capteurIn = capteurIn;
+		this.capteurOut = capteurOut;
+	}
+
+
+
+	/**
      * 
      * @return capteur
      */

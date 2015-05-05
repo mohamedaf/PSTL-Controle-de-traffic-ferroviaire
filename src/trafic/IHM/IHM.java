@@ -37,7 +37,7 @@ public class IHM implements IIhm {
 
     private void initPrincipalFrame() {
 	jFrame = new JFrame();
-	jFrame.setSize(600, 600);
+	jFrame.setSize(700, 600);
 	Box vertBox = Box.createVerticalBox();
 	Box horBox = Box.createHorizontalBox();
 
@@ -60,6 +60,7 @@ public class IHM implements IIhm {
 
 	    @Override
 	    public void actionPerformed(ActionEvent arg0) {
+	    	
 		controller.start();
 
 	    }
@@ -103,26 +104,6 @@ public class IHM implements IIhm {
 
 	Collections.sort(sensorIdTab);
 
-	for (Position p : circuit.getInit().getListPositions()) {
-	    int pos = -1;
-	    if (sensorIdTab.size() >= 3) {
-		if (p.getAfter().getId() == sensorIdTab.get(0)) {
-		    pos = CircuitPanel0.POS_3_1;
-		} else if (p.getAfter().getId() == sensorIdTab.get(1)) {
-		    pos = CircuitPanel0.POS_1_2;
-		} else if (p.getAfter().getId() == sensorIdTab.get(2)) {
-		    pos = CircuitPanel0.POS_2_3;
-		} else {
-		    System.err
-			    .println("Erreur : Position du train inconnue dans le circuit de l'IHM");
-		}
-		// circuitPanel.addTrain(p.getTrain().getId(), pos);
-	    } else {
-		System.err.println("Erreur de taille");
-	    }
-
-	}
-
 	Box horBox = (Box) jFrame.getContentPane().getComponent(0);
 
 	jFrame.getContentPane().remove(0);
@@ -154,7 +135,6 @@ public class IHM implements IIhm {
 	}
 
 	Box horBox = (Box) jFrame.getContentPane().getComponent(0);
-	System.out.println("Count ::: " + horBox.getComponentCount());
 	jFrame.getContentPane().remove(0);
 	JPanel c = circuitPanel.getComponent();
 	c.setAlignmentX(Component.LEFT_ALIGNMENT);

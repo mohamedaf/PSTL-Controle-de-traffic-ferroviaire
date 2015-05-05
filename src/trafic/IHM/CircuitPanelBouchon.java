@@ -12,11 +12,6 @@ public class CircuitPanelBouchon implements ICircuitPanel {
 
     }
 
-    @Override
-    public void addTrain(int trainId, int pos) {
-	// TODO Auto-generated method stub
-
-    }
 
     @Override
     public JPanel getComponent() {
