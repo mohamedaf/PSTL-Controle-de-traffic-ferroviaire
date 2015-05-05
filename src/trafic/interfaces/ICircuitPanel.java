@@ -9,8 +9,6 @@ public interface ICircuitPanel {
 
     public void step(int trainId);
 
-    public void addTrain(int trainId, int pos);
-
     public JPanel getComponent();
 
     public void switchLight(int lightId);

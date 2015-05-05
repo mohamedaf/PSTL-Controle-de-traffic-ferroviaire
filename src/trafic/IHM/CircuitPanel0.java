@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import trafic.elements.Position;
 import trafic.interfaces.ICircuitPanel;
 
 public class CircuitPanel0 extends JPanel implements ICircuitPanel {
@@ -117,7 +118,6 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 
     }
 
-    @Override
     public void addTrain(int trainId, int pos) {
 	mapPos.put(trainId, pos);
     }
@@ -183,6 +183,12 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 
 	Thread t = new Thread(r);
 	t.start();
+    }
+
+    @Override
+    public void addPosition(Position pos) {
+	// TODO Auto-generated method stub
+
     }
 
 }

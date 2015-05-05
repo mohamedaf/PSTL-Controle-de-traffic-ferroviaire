@@ -59,7 +59,7 @@ public class RulerScen7 implements IRuler {
 
 	ArrayList<Light> aMettreAuVert = new ArrayList<Light>();
 
-	/* On utilise HashSet pour qu'il n'y ait pas d'�l�ments en double */
+	/* On utilise HashSet pour qu'il n'y ait pas d'elements en double */
 	HashSet<Light> lightsAEnlever = new HashSet<Light>();
 
 	for (Position p : listPos) {
@@ -106,7 +106,8 @@ public class RulerScen7 implements IRuler {
 
 		dirigerAiguillageInit(sw, p);
 	    }
-	    /* On d�marre tous les trains */
+
+	    /* On demarre tous les trains */
 	    controller.setTrain(p.getTrain().getId(), TrainAction.start, p
 		    .getTrain().getDirection(), true);
 	}
@@ -131,6 +132,7 @@ public class RulerScen7 implements IRuler {
 	    System.err.println("circuit null !!!!!!");
 	}
 
+	/* On recupere le train et le feu se trouvant devant */
 	for (Position p : circuit.getInit().getListPositions()) {
 	    if (p.getAfter().getId() == sensorId) {
 		pos = p;
@@ -138,11 +140,10 @@ public class RulerScen7 implements IRuler {
 		myLight = circuit.getLights().getLightById(sensorId);
 	    }
 	    /*
-	     * Si un train est situ� avant le capteur precedant le capteur
+	     * Si un train est situe avant le capteur precedant le capteur
 	     * active
 	     */
-	    for (Sensor s : circuit.getTopography()
-		    .getSensorEdgesById(sensorId).getCapteurInList()) {
+	    for (Light s : myLightsBefore) {
 		if (p.getAfter().getId() == s.getId()) {
 		    trainsDerriere.add(p);
 		}
@@ -167,8 +168,10 @@ public class RulerScen7 implements IRuler {
 	if (myLight != null && myLight.getColor() == Color.red) {
 	    controller.setTrain(train.getId(), TrainAction.stop,
 		    train.getDirection(), false);
-	} else { /* Si le feu est vert ou qu'il n'y a pas de feu */
+	} else {
+	    /* Si le feu est vert ou qu'il n'y a pas de feu */
 	    int aft = pos.getAfter().getId();
+
 	    /* Si le train arrive a un aiguillage */
 	    if (circuit.getTopography().isPartOfSwitchEdge(aft)) {
 		SwitchEdges aiguillage = circuit.getTopography()
@@ -176,6 +179,7 @@ public class RulerScen7 implements IRuler {
 		if (aiguillage != null)
 		    dirigerAiguillage(aiguillage, pos);
 	    }
+
 	    /* Le train continue d'avancer */
 	    controller.setTrain(train.getId(), TrainAction.start,
 		    train.getDirection(), false);
@@ -213,7 +217,9 @@ public class RulerScen7 implements IRuler {
     }
 
     /**
-     * Retourne la liste des feux precedent le capteur actuel
+     * Retourne la liste des feux precedent le capteur actuel, Il se peut qu'un
+     * capteur precedent n'aye pas de feu, il faut donc chercher recursivement
+     * les feux
      * 
      * @param sensor
      *            : capteur
@@ -254,18 +260,22 @@ public class RulerScen7 implements IRuler {
     }
 
     /**
-     * 
+     * Diriger l'aiguillage dans le bon sens, a l'initialisation
      * 
      * @param aiguillage
      * @param pos
      */
     private void dirigerAiguillageInit(SwitchEdges aiguillage, Position pos) {
 	Sensor s = null;
+
+	/* On recupere le capteur vers lequel l'aguillage doit etre fait */
 	if (aiguillage.getType() == SwitchType._1_2) {
 	    s = pos.getAfter();
 	} else if (aiguillage.getType() == SwitchType._2_1) {
 	    s = pos.getBefore();
 	}
+
+	/* Modifier l'aiguillage en consequence */
 	if (aiguillage.isBranch0(s.getId())) {
 	    controller.setSwitch(aiguillage.getId(), SwitchPos.b0);
 	} else if (aiguillage.isBranch1(s.getId())) {
@@ -274,7 +284,8 @@ public class RulerScen7 implements IRuler {
     }
 
     /**
-     * 
+     * Diriger l'aiguillage dans le bon sens, le train est en mouvement juste
+     * avant l'aiguillage
      * 
      * @param aiguillage
      * @param pos

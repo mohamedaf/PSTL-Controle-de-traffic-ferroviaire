@@ -116,7 +116,7 @@ public class IHM implements IIhm {
 		    System.err
 			    .println("Erreur : Position du train inconnue dans le circuit de l'IHM");
 		}
-		circuitPanel.addTrain(p.getTrain().getId(), pos);
+		// circuitPanel.addTrain(p.getTrain().getId(), pos);
 	    } else {
 		System.err.println("Erreur de taille");
 	    }
@@ -147,7 +147,8 @@ public class IHM implements IIhm {
 	    init0(circuit);
 	    break;
 	default:
-	    circuitPanel = new AutomaticCircuitPanel(500, 600, circuit);
+	    circuitPanel = new AutomaticCircuitPanel(500, 600, circuit,
+		    "data/Loco.png");
 	    System.err.println("Erreur : scenario inconnu.");
 	    break;
 	}

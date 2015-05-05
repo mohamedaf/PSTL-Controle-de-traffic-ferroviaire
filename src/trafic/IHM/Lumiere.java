@@ -30,6 +30,7 @@ public class Lumiere implements LumiereInterface {
 	this.height = height;
 
 	this.color = colorOff;
+	this.id = -1;
     }
 
     @Override
@@ -115,6 +116,10 @@ public class Lumiere implements LumiereInterface {
     @Override
     public boolean isOn() {
 	return color == colorOn;
+    }
+
+    public int getId() {
+	return id;
     }
 
 }
