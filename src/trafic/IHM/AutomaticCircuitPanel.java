@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import trafic.cparser.TrainIhm;
 import trafic.elements.Pcf;
+import trafic.elements.Position;
 import trafic.elements.Sensor;
 import trafic.elements.SensorEdges;
 import trafic.interfaces.ICircuitPanel;
@@ -31,6 +32,8 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
     private Pcf circuit;
     private ArrayList<TrainIhm> trainsList = new ArrayList<TrainIhm>();
     private ArrayList<Point> centersList = new ArrayList<Point>();
+    private ArrayList<PositionForIhm> posList = new ArrayList<PositionForIhm>();
+    private int pointSize;
 
     public AutomaticCircuitPanel(int width, int height, Pcf circuit,
 	    String train) {
@@ -55,6 +58,7 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 	double angle = 2 * Math.PI / sensorNumbers;
 	int cpt = 0;
 	int pointH = height / 50, pointW = width / 50;
+	pointSize = pointH + 5;
 
 	int x = 0, y = 0, x2 = -1, y2 = -1;
 	int id;
@@ -100,9 +104,11 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 		if (lLight != null) {
 		    x = lLight.getX() + lLight.getWidth() / 2;
 		    y = lLight.getY() + lLight.getHeight() / 2;
-		    linesList.add(new Line2D.Double(x, y, lSensor.getX()
+		    Line2D.Double line = new Line2D.Double(x, y, lSensor.getX()
 			    + lSensor.getWidth() / 2, lSensor.getY()
-			    + lSensor.getHeight() / 2));
+			    + lSensor.getHeight() / 2);
+		    linesList.add(line);
+
 		} else {
 		    x = lSensor.getX() + lSensor.getWidth() / 2;
 		    y = lSensor.getY() + lSensor.getHeight() / 2;
@@ -113,8 +119,28 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 		Line2D.Double ll = new Line2D.Double(x, y, x2, y2);
 		linesList.add(ll);
 
-		centersList.add(lineCenter(ll));
 	    }
+	}
+
+	for (Position p : circuit.getInit().getListPositions()) {
+	    Lumiere lSensorBefore;
+	    Lumiere lLightBefore = lightMap.get(p.getBefore().getId());
+	    Lumiere lSensorAfter = sensorMap.get(p.getAfter().getId());
+	    if (lLightBefore == null) {
+		lSensorBefore = sensorMap.get(p.getBefore().getId());
+		x = lSensorBefore.getX();
+		y = lSensorBefore.getY();
+	    }
+	    x2 = lSensorAfter.getX();
+	    y2 = lSensorAfter.getY();
+
+	    Point point = lineCenter(x, y, x2, y2);
+
+	    TrainIhm tmp = new TrainIhm(new Lumiere(Color.CYAN, Color.ORANGE,
+		    point.x, point.y, pointSize, pointSize), p, pointSize);
+	    trainsList.add(tmp);
+	    SwitchLightThread slt = new SwitchLightThread(tmp, this);
+	    slt.start();
 	}
 
 	repaint();
@@ -125,6 +151,23 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 	int x = Math.abs((int) ((l.x2 - l.x1) / 2));
 	int y = Math.abs((int) ((l.y2 - l.y1) / 2));
 	return new Point(x, y);
+    }
+
+    private Point lineCenter(int x1, int y1, int x2, int y2) {
+	int x = Math.abs((int) ((x2 - x1) / 2));
+	int y = Math.abs((int) ((y2 - y1) / 2));
+	return new Point(x, y);
+    }
+
+    private float getAngle(Point o, Point target) {
+	float angle = (float) Math.toDegrees(Math.atan2(target.y - o.y,
+		target.x - o.x));
+
+	if (angle < 0) {
+	    angle += 360;
+	}
+
+	return angle;
     }
 
     @Override
@@ -145,11 +188,27 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 	for (Line2D.Double ld : linesList) {
 	    g.drawLine((int) ld.x1, (int) ld.y1, (int) ld.x2, (int) ld.y2);
 	}
+	for (TrainIhm tt : trainsList) {
+	    g.setColor(tt.getColor());
+	    g.fillOval(tt.getX(), tt.getY(), tt.getSize(), tt.getSize());
+	}
+
     }
 
     @Override
     public void step(int trainId) {
-	// TODO Auto-generated method stub
+	int x1, y1, x2, y2;
+	for (TrainIhm t : trainsList) {
+	    if (trainId == t.getPos().getTrain().getId()) {
+		if (t.isEntreCapteurFeu()) {
+		    Lumiere l = lightMap.get(t.getPos().getBefore().getId());
+		} else {
+		    Lumiere l = lightMap.get(t.getPos().getAfter().getId());
+		}
+
+		break;
+	    }
+	}
 
     }
 
