@@ -2,8 +2,6 @@ package trafic.IHM;
 
 import javax.swing.JPanel;
 
-import trafic.cparser.TrainIhm;
-
 public class SwitchLightThread extends Thread {
     private TrainIhm l;
     private boolean run = true;

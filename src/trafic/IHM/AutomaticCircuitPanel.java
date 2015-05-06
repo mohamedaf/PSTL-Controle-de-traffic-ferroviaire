@@ -16,7 +16,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import trafic.cparser.TrainIhm;
 import trafic.elements.Pcf;
 import trafic.elements.Position;
 import trafic.elements.Sensor;

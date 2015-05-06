@@ -39,6 +39,7 @@ public class RulerScen1 implements IRuler {
 	super();
 	this.controller = controller;
 	circuit = controller.getPCF();
+	/* Le temps d'attente dans une station est de 5 secondes */
 	reUpThread = new ReUpThread(5000, this);
     }
 
@@ -51,10 +52,11 @@ public class RulerScen1 implements IRuler {
     public void notifyInit() {
 	reUpThread.start();
 
-	/* Recuperation de la liste des feux et positions */
+	/* Recuperation de la liste des feux */
 	ArrayList<Light> listLights = (ArrayList<Light>) circuit.getLights()
 		.getListLights().clone();
 
+	/* Recuperation de la liste de positions */
 	ArrayList<Position> listPos = (ArrayList<Position>) circuit.getInit()
 		.getListPositions().clone();
 

@@ -51,12 +51,16 @@ public class RulerScen7 implements IRuler {
     /* Ca fonctionne, Ne pas toucher, merci :-) */
     public void notifyInit() {
 	reUpThread.start();
+
+	/* Recuperation de la liste des feux */
 	ArrayList<Light> listLights = (ArrayList<Light>) circuit.getLights()
 		.getListLights().clone();
 
+	/* Recuperation de la liste des positions */
 	ArrayList<Position> listPos = (ArrayList<Position>) circuit.getInit()
 		.getListPositions().clone();
 
+	/* Liste contenant les feux a mettre au vert */
 	ArrayList<Light> aMettreAuVert = new ArrayList<Light>();
 
 	/* On utilise HashSet pour qu'il n'y ait pas d'elements en double */

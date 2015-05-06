@@ -81,7 +81,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		 * mise a jour de la position du train car dans le cas
 		 * NotifyInit on a tojours pas reçu de reponse up on demande
 		 * juste aux trains de demarrer par contre apres le cas Init la
-		 * c'est plus pareil les trains roulent donc on effecture le
+		 * c'est plus pareil les trains roulent donc on effectue le
 		 * changement de position
 		 */
 
@@ -104,6 +104,10 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	    if (ihm != null)
 		ihm.switchLight(id);
 
+	    /*
+	     * Modifier la couleur du feu dans l'objet PCF et informer le
+	     * moniteur (serveur) du changement
+	     */
 	    parser.setLightToXml(id, color);
 	    circuit.getLights().getLightById(id).setColor(color);
 	    System.out.println("setLight id: " + id + " color: " + color);

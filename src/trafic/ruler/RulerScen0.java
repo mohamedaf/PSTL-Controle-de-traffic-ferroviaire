@@ -58,7 +58,7 @@ public class RulerScen0 implements IRuler {
 
 	/* Regles 1 et 2 */
 
-	/* On r�cup�re le train qui vient d'activer le capteur */
+	/* On recupere le train qui vient d'activer le capteur */
 	for (Position p : controller.getPCF().getInit().getListPositions()) {
 	    if (p.getAfter().getId() == sensorId) {
 		pos = p;
@@ -94,15 +94,18 @@ public class RulerScen0 implements IRuler {
 	}
 
 	if (myLight.getColor() == Color.green) {
+	    /* Si le feu est vert on demarre le train */
 	    controller.setTrain(t.getId(), TrainAction.start, t.getDirection(),
 		    initList.get(t.getId()));
 
 	    if (initList.get(t.getId()) == true) {
 		initList.put(t.getId(), false);
 	    } else {
+		/* On met le feu au rouge apres le passage du train */
 		controller.setLight(myLight.getId(), Color.red);
 
 		/* Regles 4 et 3 */
+		/* On met le feu se trouvant avant le train au vert */
 		controller.setLight(myLightBefore.getId(), Color.green);
 
 		/* Si il y a un train derriere qui est a l'arret, up */
@@ -111,6 +114,7 @@ public class RulerScen0 implements IRuler {
 		}
 	    }
 	} else {
+	    /* Sinon on arrete le train car le feu est rouge */
 	    controller.setTrain(t.getId(), TrainAction.stop, t.getDirection(),
 		    false);
 	}
@@ -125,10 +129,11 @@ public class RulerScen0 implements IRuler {
     @SuppressWarnings("unchecked")
     @Override
     public void notifyInit() {
-	/* Recuperation de la liste des feux et positions */
+	/* Recuperation de la liste des feux */
 	ArrayList<Light> listLights = (ArrayList<Light>) circuit.getLights()
 		.getListLights().clone();
 
+	/* Recuperation de la liste des positions */
 	ArrayList<Position> listPos = (ArrayList<Position>) circuit.getInit()
 		.getListPositions().clone();
 
@@ -138,7 +143,7 @@ public class RulerScen0 implements IRuler {
 	    /* Recuperer l'Id du feu derriere le train courant */
 	    int captNum = p.getBefore().getId();
 
-	    // Init true
+	    /* Init true */
 	    initList.put(p.getTrain().getId(), true);
 
 	    /* supprimer ce feu */

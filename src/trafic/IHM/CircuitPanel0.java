@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import trafic.elements.Position;
 import trafic.interfaces.ICircuitPanel;
 
 public class CircuitPanel0 extends JPanel implements ICircuitPanel {
@@ -184,6 +183,5 @@ public class CircuitPanel0 extends JPanel implements ICircuitPanel {
 	Thread t = new Thread(r);
 	t.start();
     }
-
 
 }
