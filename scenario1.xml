@@ -1,0 +1,98 @@
+<pcf reqid="1" type="answer">
+	<olleh id="1" />
+	<scenario id="1" />
+	<topography>
+		<sensor-edges>
+			<capteur id="0" type="canton" />
+			<in></in>
+			<out>
+				<capteur id="1" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="1" type="canton" />
+			<in>
+				<capteur id="0" type="canton" />
+			</in>
+			<out>
+				<capteur id="2" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="2" type="canton" />
+			<in>
+				<capteur id="1" type="canton" />
+			</in>
+			<out>
+				<capteur id="3" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="3" type="canton" />
+			<in>
+				<capteur id="5" type="canton" />
+				<capteur id="2" type="canton" />
+			</in>
+			<out>
+				<capteur id="6" type="station" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="4" type="canton" />
+			<in>
+				<capteur id="6" type="canton" />
+			</in>
+			<out>
+				<capteur id="5" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="6" type="station" />
+			<in>
+				<capteur id="3" type="canton" />
+			</in>
+			<out>
+				<capteur id="4" type="canton" />
+			</out>
+		</sensor-edges>
+		<sensor-edges>
+			<capteur id="5" type="canton" />
+			<in>
+				<capteur id="4" type="canton" />
+			</in>
+			<out>
+				<capteur id="3" type="canton" />
+			</out>
+		</sensor-edges>
+		<switch-edges id="1" type="2-1" trunk="3" branch0="2"
+			branch1="5">
+		</switch-edges>
+	</topography>
+	<init>
+		<position>
+			<before>
+				<capteur id="1" type="canton" />
+			</before>
+			<train id="2" action="stop" direction="forward" />
+			<after>
+				<capteur id="2" type="canton" />
+			</after>
+		</position>
+		<position>
+			<before>
+				<capteur id="0" type="canton" />
+			</before>
+			<train id="3" action="stop" direction="forward" />
+			<after>
+				<capteur id="1" type="canton" />
+			</after>
+		</position>
+	</init>
+	<lights>
+		<light id="1" color="red" />
+		<light id="2" color="red" />
+		<light id="3" color="red" />
+		<light id="4" color="red" />
+		<light id="5" color="red" />
+	</lights>
+</pcf>
