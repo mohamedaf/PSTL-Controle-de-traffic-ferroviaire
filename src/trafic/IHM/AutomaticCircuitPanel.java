@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 	private Image train;
 	private ArrayList<TrainIhm> trainsList = new ArrayList<TrainIhm>();
 	private int pointSize;
+	private int pointW;
 
 	public AutomaticCircuitPanel(int width, int height, Pcf circuit,
 			String train) {
@@ -52,8 +55,9 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 		int sensorNumbers = circuit.getTopography().getSensorEdgesList().size();
 		double angle = 2 * Math.PI / sensorNumbers;
 		int cpt = 0;
-		int pointH = height / 50, pointW = width / 50;
-		pointSize = pointH + 5;
+		pointW = width / 50;
+
+		pointSize = pointW + 5;
 
 		int x = 0, y = 0, x2 = -1, y2 = -1;
 		int id;
@@ -65,13 +69,16 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 
 		System.out.println("Center X : " + centerX + " center Y : " + centerY);
 
+		/*
+		 * On genere les points correspondant aux sensors
+		 */
 		for (SensorEdges se : circuit.getTopography().getSensorEdgesList()) {
 
 			x = (int) (centerX + radius * Math.cos(cpt * angle));
 			y = (int) (centerY + radius * Math.sin(cpt * angle));
 			id = se.getCapteur().getId();
 			sensorMap.put(id, new Lumiere(Color.YELLOW, Color.BLACK, x, y,
-					pointW, pointH, id));
+					pointW, pointW, id));
 
 			if (circuit.getLights().getLightById(se.getCapteur().getId()) != null) {
 				x2 = (int) (centerX + radius
@@ -80,7 +87,7 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 						* Math.sin(cpt * angle + angle / 3));
 
 				lightMap.put(id, new Lumiere(Color.GREEN, Color.RED, x2, y2,
-						pointW, pointH, id));
+						pointW, pointW, id));
 			} else {
 				x2 = x;
 				y2 = y;
@@ -88,6 +95,10 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 			cpt++;
 		}
 
+		/*
+		 * On genere les points correspondant aux lights et les lignes entre les
+		 * points
+		 */
 		for (SensorEdges sEdges : circuit.getTopography().getSensorEdgesList()) {
 			id = sEdges.getCapteur().getId();
 			Lumiere lSensor = sensorMap.get(id);
@@ -111,10 +122,13 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 				Line2D.Double ll = new Line2D.Double(x, y, x2, y2);
 				linesList.add(ll);
 
-				
-				System.out.println("Lien entre "+id+" et "+s.getId());
+				System.out.println("Lien entre " + id + " et " + s.getId());
 			}
 		}
+
+		/*
+		 * Position des trains
+		 */
 
 		for (Position p : circuit.getInit().getListPositions()) {
 			Lumiere lSensorBefore;
@@ -140,44 +154,91 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 			slt.start();
 		}
 
+		addDragListener();
 		repaint();
+
 	}
 
+	/* Pour pouvoir deplacer les points */
+	private void addDragListener() {
+		addMouseMotionListener(new MouseMotionListener() {
+			MouseEvent pressed;
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				pressed = e;
+
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				Point p = pressed.getPoint();
+				Point location = null;
+				Lumiere l;
+				Lumiere lll2 = null;
+				for (Map.Entry<Integer, Lumiere> entry : sensorMap.entrySet()) {
+					l = entry.getValue();
+					if (p.distance(l.getX() + pointW / 2, l.getY() + pointW / 2) <= pointW / 2) {
+						location = new Point(l.getX(), l.getY());
+						lll2 = l;
+					}
+				}
+				for (Map.Entry<Integer, Lumiere> entry : lightMap.entrySet()) {
+					l = entry.getValue();
+					if (p.distance(l.getX() + pointW / 2, l.getY() + pointW / 2) <= pointW / 2) {
+						location = new Point(l.getX(), l.getY());
+						lll2 = l;
+					}
+				}
+
+				if (pressed != null && location != null) {
+					int x = location.x - pressed.getX() + e.getX();
+					int y = location.y - pressed.getY() + e.getY();
+
+					lll2.setX(x);
+					lll2.setY(y);
+
+					repaint();
+				}
+			}
+		});
+	}
+
+	/**
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return Le point milieu de deux points
+	 */
 	private Point lineCenter(int x1, int y1, int x2, int y2) {
 		int x = (int) ((x2 + x1) / 2);
 		int y = (int) ((y2 + y1) / 2);
 		return new Point(x, y);
 	}
 
-	private float getAngle(Point o, Point target) {
-		float angle = (float) Math.toDegrees(Math.atan2(target.y - o.y,
-				target.x - o.x));
-
-		if (angle < 0) {
-			angle += 360;
-		}
-
-		return angle;
-	}
-
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		/* Sensors */
 		for (Map.Entry<Integer, Lumiere> entry : sensorMap.entrySet()) {
 			Lumiere l = entry.getValue();
 			g.setColor(l.getColor());
 			g.fillOval(l.getX(), l.getY(), l.getWidth(), l.getHeight());
 			g.drawString(l.getId() + "", l.getX() + 0, l.getY() - 10);
 		}
+		/* Lights */
 		for (Map.Entry<Integer, Lumiere> entry : lightMap.entrySet()) {
 			Lumiere l = entry.getValue();
 			g.setColor(l.getColor());
 			g.fillOval(l.getX(), l.getY(), l.getWidth(), l.getHeight());
 		}
+		/* Lines */
 		g.setColor(Color.BLACK);
 		for (Line2D.Double ld : linesList) {
 			g.drawLine((int) ld.x1, (int) ld.y1, (int) ld.x2, (int) ld.y2);
 		}
+		/* Trains */
 		for (TrainIhm tt : trainsList) {
 			g.setColor(tt.getColor());
 			g.fillOval(tt.getX(), tt.getY(), tt.getSize(), tt.getSize());
