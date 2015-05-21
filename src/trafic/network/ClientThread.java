@@ -131,6 +131,7 @@ public class ClientThread extends Thread {
 	    if (toServer == null)
 		toServer = new PrintWriter(socket.getOutputStream(), true);
 	    toServer.println(txt);
+	    toServer.flush();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

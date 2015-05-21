@@ -7,11 +7,32 @@ import javax.swing.JPanel;
  */
 public interface ICircuitPanel {
 
-    public void step(int trainId);
+	/**
+	 * Indique que le train a avance d'un pas
+	 * 
+	 * @param trainId
+	 *            Id du train qui avance
+	 */
+	public void step(int trainId);
 
-    public JPanel getComponent();
+	/**
+	 * @return le composant actuel
+	 */
+	public JPanel getComponent();
 
-    public void switchLight(int lightId);
+	/**
+	 * Change la couleur d'un feu
+	 * 
+	 * @param lightId
+	 *            Id du feu dont on change la couleur
+	 */
+	void switchLight(int lightId);
 
-    public void notifyUp(int sensorId);
+	/**
+	 * Notifie d'un up du capteur
+	 * 
+	 * @param sensorId
+	 *            Capteur active
+	 */
+	public void notifyUp(int sensorId);
 }
