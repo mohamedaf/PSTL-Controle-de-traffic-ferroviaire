@@ -23,150 +23,137 @@ import trafic.interfaces.IIhm;
 import trafic.interfaces.StartableStoppable;
 
 public class IHM implements IIhm {
-    private final StartableStoppable controller;
-    private int numScenario;
-    private ICircuitPanel circuitPanel;
-    JFrame jFrame;
-    private Pcf circuit;
+	private final StartableStoppable controller;
+	private int numScenario;
+	private ICircuitPanel circuitPanel;
+	JFrame jFrame;
+	private Pcf circuit;
 
-    public IHM(StartableStoppable controller) {
-	this.controller = controller;
+	public IHM(StartableStoppable controller) {
+		this.controller = controller;
 
-	initPrincipalFrame();
-    }
+		initPrincipalFrame();
+	}
 
-    private void initPrincipalFrame() {
-	jFrame = new JFrame();
-	jFrame.setSize(700, 600);
-	Box vertBox = Box.createVerticalBox();
-	Box horBox = Box.createHorizontalBox();
+	private void initPrincipalFrame() {
+		jFrame = new JFrame();
+		jFrame.setSize(700, 600);
+		Box vertBox = Box.createVerticalBox();
+		Box horBox = Box.createHorizontalBox();
 
-	final JCheckBox chemin = new JCheckBox("Chemin al�atoire", false);
-	chemin.addItemListener(new ItemListener() {
+		JButton button1 = new JButton("Start");
+		JButton button2 = new JButton("Stop");
 
-	    @Override
-	    public void itemStateChanged(ItemEvent arg0) {
-		System.out.println("Change : " + chemin.isSelected());
+		button1.addActionListener(new ActionListener() {
 
-	    }
-	});
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 
-	vertBox.add(chemin);
+				controller.start();
 
-	JButton button1 = new JButton("Start");
-	JButton button2 = new JButton("Stop");
+			}
+		});
 
-	button1.addActionListener(new ActionListener() {
+		button2.addActionListener(new ActionListener() {
 
-	    @Override
-	    public void actionPerformed(ActionEvent arg0) {
-	    	
-		controller.start();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.stop();
 
-	    }
-	});
+			}
+		});
 
-	button2.addActionListener(new ActionListener() {
+		vertBox.add(button1);
+		vertBox.add(button2);
 
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		controller.stop();
+		horBox.add(vertBox);
+		horBox.add(new JSeparator(JSeparator.VERTICAL));
 
-	    }
-	});
+		jFrame.add(horBox);
+		jFrame.setVisible(true);
 
-	vertBox.add(button1);
-	vertBox.add(button2);
+		jFrame.setResizable(false);
+		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
-	horBox.add(vertBox);
-	horBox.add(new JSeparator(JSeparator.VERTICAL));
+	private void init0(Pcf circuit) {
+		this.circuit = circuit;
 
-	jFrame.add(horBox);
-	jFrame.setVisible(true);
+		ArrayList<SensorEdges> sensorList = circuit.getTopography()
+				.getSensorEdgesList();
 
-	jFrame.setResizable(false);
-	jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+		ArrayList<Integer> sensorIdTab = new ArrayList<Integer>(
+				sensorList.size());
 
-    private void init0(Pcf circuit) {
-	this.circuit = circuit;
+		for (int i = 0; i < sensorList.size(); i++) {
+			sensorIdTab.add(i, sensorList.get(i).getCapteur().getId());
 
-	ArrayList<SensorEdges> sensorList = circuit.getTopography()
-		.getSensorEdgesList();
+		}
 
-	ArrayList<Integer> sensorIdTab = new ArrayList<Integer>(
-		sensorList.size());
+		Collections.sort(sensorIdTab);
 
-	for (int i = 0; i < sensorList.size(); i++) {
-	    sensorIdTab.add(i, sensorList.get(i).getCapteur().getId());
+		Box horBox = (Box) jFrame.getContentPane().getComponent(0);
+
+		jFrame.getContentPane().remove(0);
+		JPanel c = circuitPanel.getComponent();
+		c.setAlignmentX(Component.LEFT_ALIGNMENT);
+		horBox.add(c);
+		jFrame.add(horBox);
+
+		jFrame.setVisible(true);
+		jFrame.repaint();
+	}
+
+	@Override
+	public void notifyInit(Pcf circuit) {
+		numScenario = circuit.getScenario().getId();
+		this.circuit = circuit;
+		switch (numScenario) {
+		case 0:
+			circuitPanel = new CircuitPanel0("data/Circuit0.png",
+					"data/Loco.png");
+			System.out.println("\nScenario 0 IHM ok\n");
+			init0(circuit);
+			break;
+		default:
+			circuitPanel = new AutomaticCircuitPanel(500, 600, circuit,
+					"data/Loco.png");
+			break;
+		}
+
+		Box horBox = (Box) jFrame.getContentPane().getComponent(0);
+		jFrame.getContentPane().remove(0);
+		JPanel c = circuitPanel.getComponent();
+		c.setAlignmentX(Component.LEFT_ALIGNMENT);
+		horBox.add(c);
+		jFrame.add(horBox);
+
+		jFrame.setVisible(true);
+		jFrame.repaint();
 
 	}
 
-	Collections.sort(sensorIdTab);
-
-	Box horBox = (Box) jFrame.getContentPane().getComponent(0);
-
-	jFrame.getContentPane().remove(0);
-	JPanel c = circuitPanel.getComponent();
-	c.setAlignmentX(Component.LEFT_ALIGNMENT);
-	horBox.add(c);
-	jFrame.add(horBox);
-
-	jFrame.setVisible(true);
-	jFrame.repaint();
-    }
-
-    @Override
-    public void notifyInit(Pcf circuit) {
-	numScenario = circuit.getScenario().getId();
-	this.circuit = circuit;
-	switch (numScenario) {
-	case 0:
-	    circuitPanel = new CircuitPanel0("data/Circuit0.png",
-		    "data/Loco.png");
-	    System.out.println("\nSc�nario 0 IHM ok\n");
-	    init0(circuit);
-	    break;
-	default:
-	    circuitPanel = new AutomaticCircuitPanel(500, 600, circuit,
-		    "data/Loco.png");
-	    System.err.println("Erreur : scenario inconnu.");
-	    break;
+	@Override
+	public void switchLight(int lightId) {
+		circuitPanel.switchLight(lightId);
 	}
 
-	Box horBox = (Box) jFrame.getContentPane().getComponent(0);
-	jFrame.getContentPane().remove(0);
-	JPanel c = circuitPanel.getComponent();
-	c.setAlignmentX(Component.LEFT_ALIGNMENT);
-	horBox.add(c);
-	jFrame.add(horBox);
+	@Override
+	public void notifyUp(int sensorId) {
+		for (Position p : circuit.getInit().getListPositions()) {
+			if (p.getAfter().getId() == sensorId) {
+				step(p.getTrain().getId());
+				break;
+			}
+		}
+		circuitPanel.notifyUp(sensorId);
 
-	jFrame.setVisible(true);
-	jFrame.repaint();
-
-    }
-
-    @Override
-    public void switchLight(int lightId) {
-	circuitPanel.switchLight(lightId);
-    }
-
-    @Override
-    public void notifyUp(int sensorId) {
-	for (Position p : circuit.getInit().getListPositions()) {
-	    if (p.getAfter().getId() == sensorId) {
-		step(p.getTrain().getId());
-		break;
-	    }
 	}
-	circuitPanel.notifyUp(sensorId);
 
-    }
-
-    @Override
-    public void step(int idTrain) {
-	circuitPanel.step(idTrain);
-	System.out.println("step " + idTrain);
-    }
+	@Override
+	public void step(int idTrain) {
+		circuitPanel.step(idTrain);
+		System.out.println("step " + idTrain);
+	}
 
 }
