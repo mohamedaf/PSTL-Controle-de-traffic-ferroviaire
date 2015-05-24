@@ -28,7 +28,7 @@ import trafic.network.SocketCommunicator;
 public class CParser implements IParser, IToXml {
 	private IParser parser;
 	private ICommunicator communicator;
-	private static int reqid;
+	private int reqid;
 
 	/**
 	 * Constructeur
@@ -129,5 +129,6 @@ public class CParser implements IParser, IToXml {
 				Commandes.set(Commandes.switchXml(id, branch))));
 
 	}
+	
 
 }
