@@ -1,4 +1,4 @@
-package trafic.IHM;
+package trafic.IHM.elems;
 
 public class PositionForIhm {
     private final int x, y;

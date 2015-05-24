@@ -14,7 +14,7 @@ import trafic.interfaces.IController;
 import trafic.interfaces.IIhm;
 import trafic.interfaces.IRuler;
 import trafic.interfaces.IUpNotifier;
-import trafic.interfaces.StartableStoppable;
+import trafic.interfaces.IStartStop;
 
 /**
  * 
@@ -25,7 +25,7 @@ import trafic.interfaces.StartableStoppable;
  *         puis les executent en faisant appel au composant Parser permettant
  *         l'envois des requetes vers le serveur
  */
-public class Controller implements IController, IUpNotifier, StartableStoppable {
+public class Controller implements IController, IUpNotifier, IStartStop {
 	IRuler ruler;
 	CParser parser;
 	Pcf circuit;
@@ -74,8 +74,7 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		t.setDirection(direction);
 		if (action == TrainAction.start) {
 			if (!init) {
-				if (ihm != null)
-					ihm.step(id);
+				
 
 				p.setBefore(p.getAfter());
 				/*
@@ -93,8 +92,11 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 						break;
 					}
 				}
+				if (ihm != null)
+					ihm.step(id);
+				
 				System.out.println("Train : " + t.getId() + " before : "
-						+ p.getBefore() + "after : " + p.getAfter());
+						+ p.getBefore() + " after : " + p.getAfter());
 			}
 		}
 	}
@@ -145,8 +147,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 	}
 
 	@Override
-	public void start() {
-		parser = new CParser(this);
+	public void start(String address, int port) {
+		parser = new CParser(this, address, port);
 		ruler.setController(this);
 
 		parser.helloToXml(1);
@@ -164,6 +166,8 @@ public class Controller implements IController, IUpNotifier, StartableStoppable 
 		}
 
 		parser.byeToXml();
+		
+		parser = null;
 	}
 
 	@Override

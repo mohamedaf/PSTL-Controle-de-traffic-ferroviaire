@@ -1,4 +1,4 @@
-package trafic.IHM;
+package trafic.IHM.Panels;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -6,8 +6,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.Polygon;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,10 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import trafic.IHM.ImageTool;
+import trafic.IHM.elems.Lumiere;
+import trafic.IHM.elems.SwitchLightThread;
+import trafic.IHM.elems.TrainIhm;
 import trafic.elements.Pcf;
 import trafic.elements.Position;
 import trafic.elements.Sensor;
@@ -154,54 +159,8 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 			slt.start();
 		}
 
-		addDragListener();
 		repaint();
 
-	}
-
-	/* Pour pouvoir deplacer les points */
-	private void addDragListener() {
-		addMouseMotionListener(new MouseMotionListener() {
-			MouseEvent pressed;
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				pressed = e;
-
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Point p = pressed.getPoint();
-				Point location = null;
-				Lumiere l;
-				Lumiere lll2 = null;
-				for (Map.Entry<Integer, Lumiere> entry : sensorMap.entrySet()) {
-					l = entry.getValue();
-					if (p.distance(l.getX() + pointW / 2, l.getY() + pointW / 2) <= pointW / 2) {
-						location = new Point(l.getX(), l.getY());
-						lll2 = l;
-					}
-				}
-				for (Map.Entry<Integer, Lumiere> entry : lightMap.entrySet()) {
-					l = entry.getValue();
-					if (p.distance(l.getX() + pointW / 2, l.getY() + pointW / 2) <= pointW / 2) {
-						location = new Point(l.getX(), l.getY());
-						lll2 = l;
-					}
-				}
-
-				if (pressed != null && location != null) {
-					int x = location.x - pressed.getX() + e.getX();
-					int y = location.y - pressed.getY() + e.getY();
-
-					lll2.setX(x);
-					lll2.setY(y);
-
-					repaint();
-				}
-			}
-		});
 	}
 
 	/**
@@ -281,7 +240,8 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 					lLightAfter = lightMap.get(afterId);
 					if (lLightAfter == null) {
 						System.out
-								.println("IHM : Il n'y a pas de feu associe au capteur");
+								.println("IHM : Il n'y a pas de feu associe au capteur "
+										+ afterId);
 						return;
 					}
 					System.out
@@ -331,12 +291,12 @@ public class AutomaticCircuitPanel extends JPanel implements ICircuitPanel {
 			l.on();
 		repaint();
 
-		/* La lumiere reste allumee pendant 1 seconde, puis s'eteint */
+		/* La lumiere reste allumee pendant 2 secondes, puis s'eteint */
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

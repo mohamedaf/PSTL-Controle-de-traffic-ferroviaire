@@ -1,4 +1,4 @@
-package trafic.IHM;
+package trafic.IHM.Panels;
 
 import javax.swing.JPanel;
 

@@ -1,4 +1,4 @@
-package trafic.IHM;
+package trafic.IHM.Panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import trafic.IHM.ImageTool;
+import trafic.IHM.elems.Lumiere;
 import trafic.interfaces.ICircuitPanel;
 
 public class CircuitPanel0 extends JPanel implements ICircuitPanel {
