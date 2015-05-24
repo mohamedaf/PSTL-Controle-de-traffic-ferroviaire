@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 
 import trafic.elements.Pcf;
 import trafic.elements.Position;
@@ -26,6 +27,8 @@ public class IHM implements IIhm {
 	private final StartableStoppable controller;
 	private int numScenario;
 	private ICircuitPanel circuitPanel;
+	private JTextArea address;
+	private JTextArea port;
 	JFrame jFrame;
 	private Pcf circuit;
 
@@ -38,8 +41,12 @@ public class IHM implements IIhm {
 	private void initPrincipalFrame() {
 		jFrame = new JFrame();
 		jFrame.setSize(700, 600);
+		jFrame.setTitle("Controle de trafic ferroviaire");
 		Box vertBox = Box.createVerticalBox();
 		Box horBox = Box.createHorizontalBox();
+		
+		address = new JTextArea("");
+		port = new JTextArea(""+5558);
 
 		JButton button1 = new JButton("Start");
 		JButton button2 = new JButton("Stop");

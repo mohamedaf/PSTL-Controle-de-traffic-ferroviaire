@@ -171,7 +171,7 @@ public class RulerScen7 implements IRuler {
 				reUpThread.addReUp(sensorId);
 				return;
 			}
-			if (train.getAction() == TrainAction.stop) {
+			else if (train.getAction() == TrainAction.stop) {
 				System.out.println("Le train " + train.getId()
 						+ " veut redemarrer de la station "
 						+ currentSensorEdges.getCapteur().getId());

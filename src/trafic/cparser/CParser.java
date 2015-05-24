@@ -40,7 +40,7 @@ public class CParser implements IParser, IToXml {
 	reqid = 0;
 	parser = new Parser(controller);
 	communicator = new SocketCommunicator(parser);
-	communicator.connect("grimau.dynamic-dns.net", 55557);
+	communicator.connect("grimau.dynamic-dns.net", 55556);
     }
 
     /**
