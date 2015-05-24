@@ -1,4 +1,4 @@
-package trafic.IHM;
+package trafic.IHM.elems;
 
 import java.awt.Color;
 
