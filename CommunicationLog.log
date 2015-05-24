@@ -1,116 +1,340 @@
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:13 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="0" type="request"><hello id="1"/></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:13 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="1" type="request"><start></start></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="0" type = "answer"><olleh id="1"/><scenario id="7"/><topography><sensor-edges><capteur id="0" type="canton"/><in></in><out><capteur id="1" type="canton"/></out></sensor-edges><sensor-edges><capteur id="1" type="canton"/><in><capteur id="0" type="canton"/></in><out><capteur id="2" type="canton"/></out></sensor-edges><sensor-edges><capteur id="2" type="canton"/><in><capteur id="1" type="canton"/></in><out><capteur id="3" type="canton"/></out></sensor-edges><sensor-edges><capteur id="3" type="canton"/><in><capteur id="7" type="canton"/><capteur id="2" type="canton"/></in><out><capteur id="4" type="canton"/></out></sensor-edges><sensor-edges><capteur id="4" type="canton"/><in><capteur id="3" type="canton"/></in><out><capteur id="5" type="canton"/><capteur id="8" type="canton"/></out></sensor-edges><sensor-edges><capteur id="5" type="canton"/><in><capteur id="4" type="canton"/></in><out><capteur id="6" type="canton"/></out></sensor-edges><sensor-edges><capteur id="6" type="canton"/><in><capteur id="5" type="canton"/></in><out><capteur id="7" type="canton"/></out></sensor-edges><sensor-edges><capteur id="7" type="canton"/><in><capteur id="6" type="canton"/><capteur id="9" type="canton"/></in><out><capteur id="3" type="canton"/></out></sensor-edges><sensor-edges><capteur id="8" type="canton"/><in><capteur id="4" type="canton"/></in><out><capteur id="9" type="canton"/></out></sensor-edges><sensor-edges><capteur id="9" type="canton"/><in><capteur id="8" type="canton"/></in><out><capteur id="7" type="canton"/></out></sensor-edges><switch-edges id="1"  type="1-2"  trunk="4"  branch0="5"  branch1="8"> </switch-edges><switch-edges id="2"  type="2-1"  trunk="7"  branch0="6"  branch1="9"> </switch-edges><switch-edges id="3"  type="2-1"  trunk="3"  branch0="7"  branch1="2"> </switch-edges></topography><init><position><before><capteur id="1" type="canton"/></before><train id="2" action="stop" direction="forward"/><after><capteur id="2" type="canton"/></after></position><position><before><capteur id="0" type="canton"/></before><train id="3" action="stop" direction="forward"/><after><capteur id="1" type="canton"/></after></position></init><lights><light id="1" color="red"/><light id="2" color="red"/><light id="3" color="red"/><light id="4" color="red"/><light id="5" color="red"/><light id="6" color="red"/><light id="7" color="red"/><light id="8" color="red"/><light id="9" color="red"/></lights></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="2" type="request"><set><light id="2" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="3" type="request"><set><light id="3" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="4" type="request"><set><light id="4" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="5" type="request"><set><light id="5" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="6" type="request"><set><light id="6" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="7" type="request"><set><light id="7" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="8" type="request"><set><light id="8" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="9" type="request"><set><light id="9" color="green" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="10" type="request"><set><train id="2" action="start" direction="forward" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="11" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
-mai 24, 2015 4:47:33 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="1" type = "answer"><info status="ok">Simulator running ...</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="2" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="3" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="4" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="5" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="6" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:34 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="7" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:35 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="8" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:35 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="9" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:35 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="10" type = "answer"><info status="ok">Train action 2 is set to : START@@@Train direction 2 is set to : forward@@@Train 2 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
-mai 24, 2015 4:47:35 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:14 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="11" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
-mai 24, 2015 4:47:43 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:17 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="11" type = "request"><up><capteur id="1" type="canton"/></up></pcf>
-mai 24, 2015 4:47:43 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:17 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="12" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
-mai 24, 2015 4:47:43 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:17 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="12" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="12" type = "request"><up><capteur id="2" type="canton"/></up></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="13" type="request"><set><switch id="3" pos="1"/></set></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="14" type="request"><set><light id="7" color="red" /></set></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="15" type="request"><set><light id="1" color="green" /></set></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="16" type="request"><set><light id="2" color="red" /></set></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="17" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
-mai 24, 2015 4:47:44 PM trafic.network.ClientThread send
+mai 24, 2015 6:47:18 PM trafic.network.ClientThread send
 INFOS: Sent : <pcf reqid="18" type="request"><set><light id="1" color="red" /></set></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="13" type = "answer"><info status="ok">Switch 3 is set to canton: 2</info></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="14" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="15" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="16" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="17" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
-mai 24, 2015 4:47:45 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:19 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="18" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:53 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="18" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
-mai 24, 2015 4:47:53 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="19" type="request"><set><light id="7" color="green" /></set></pcf>
-mai 24, 2015 4:47:53 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="20" type="request"><set><light id="2" color="green" /></set></pcf>
-mai 24, 2015 4:47:53 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="21" type="request"><set><light id="3" color="red" /></set></pcf>
-mai 24, 2015 4:47:54 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="19" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:54 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:26 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="18" type = "request"><up><capteur id="2" type="canton"/></up></pcf>
+mai 24, 2015 6:47:26 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="19" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:26 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="19" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="19" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="20" type="request"><set><light id="7" color="green" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="21" type="request"><set><light id="2" color="green" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="22" type="request"><set><light id="3" color="red" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="23" type="request"><set><switch id="3" pos="1"/></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="24" type="request"><set><light id="7" color="red" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="25" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="26" type="request"><set><light id="1" color="green" /></set></pcf>
+mai 24, 2015 6:47:29 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="27" type="request"><set><light id="2" color="red" /></set></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="20" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:54 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="21" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="21" type = "request"><up><capteur id="2" type="canton"/></up></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="22" type="request"><set><switch id="3" pos="1"/></set></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="23" type="request"><set><light id="7" color="red" /></set></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="24" type="request"><set><light id="1" color="green" /></set></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="25" type="request"><set><light id="2" color="red" /></set></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="22" type = "answer"><info status="ok">Switch 3 is set to canton: 2</info></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="23" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread readAnswer
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="22" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="23" type = "answer"><info status="ok">Switch 3 is set to canton: 2</info></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
 INFOS: Received : <pcf reqid="24" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:55 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="25" type = "answer"><info status="ok">All light are set as requested</info></pcf>
-mai 24, 2015 4:47:56 PM trafic.network.ClientThread readAnswer
-INFOS: Received : <pcf reqid="25" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
-mai 24, 2015 4:47:56 PM trafic.network.ClientThread send
-INFOS: Sent : <pcf reqid="26" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="25" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="26" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:30 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="27" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:34 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="27" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
+mai 24, 2015 6:47:34 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="28" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:35 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="28" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="28" type = "request"><up><capteur id="4" type="canton"/></up></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="29" type="request"><set><light id="3" color="green" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="30" type="request"><set><light id="4" color="red" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="31" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="32" type="request"><set><light id="7" color="green" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="33" type="request"><set><light id="2" color="green" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="34" type="request"><set><light id="3" color="red" /></set></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="29" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="30" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="31" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="32" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="33" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:40 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="34" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:42 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="34" type = "request"><up><capteur id="4" type="canton"/></up></pcf>
+mai 24, 2015 6:47:42 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="35" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:42 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="35" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="35" type = "request"><up><capteur id="5" type="canton"/></up></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="36" type="request"><set><switch id="1" pos="0"/></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="37" type="request"><set><light id="4" color="green" /></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="38" type="request"><set><light id="5" color="red" /></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="39" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="40" type="request"><set><light id="3" color="green" /></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="41" type="request"><set><light id="4" color="red" /></set></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="36" type = "answer"><info status="ok">Switch 1 is set to canton: 5</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="37" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="38" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="39" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="40" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:44 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="41" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:49 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="41" type = "request"><up><capteur id="5" type="canton"/></up></pcf>
+mai 24, 2015 6:47:49 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="42" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="42" type = "request"><up><capteur id="6" type="canton"/></up></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="43" type="request"><set><switch id="2" pos="0"/></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="44" type="request"><set><light id="9" color="red" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="45" type="request"><set><light id="5" color="green" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="46" type="request"><set><light id="6" color="red" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="47" type="request"><set><switch id="1" pos="0"/></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="48" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="49" type="request"><set><light id="4" color="green" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="50" type="request"><set><light id="5" color="red" /></set></pcf>
+mai 24, 2015 6:47:50 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="42" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="43" type = "answer"><info status="ok">Switch 2 is set to canton: 6</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="44" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="45" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="46" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="47" type = "answer"><info status="ok">Switch 1 is set to canton: 5</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="48" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="49" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:51 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="50" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="50" type = "request"><up><capteur id="7" type="canton"/></up></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="51" type="request"><set><switch id="3" pos="0"/></set></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="52" type="request"><set><light id="2" color="red" /></set></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="53" type="request"><set><light id="6" color="green" /></set></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="54" type="request"><set><light id="9" color="green" /></set></pcf>
+mai 24, 2015 6:47:52 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="55" type="request"><set><light id="7" color="red" /></set></pcf>
+mai 24, 2015 6:47:53 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="51" type = "answer"><info status="ok">Switch 3 is set to canton: 7</info></pcf>
+mai 24, 2015 6:47:53 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="52" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:53 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="53" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:53 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="54" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:53 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="55" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="55" type = "request"><up><capteur id="6" type="canton"/></up></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="56" type="request"><set><switch id="2" pos="0"/></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="57" type="request"><set><light id="9" color="red" /></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="58" type="request"><set><light id="5" color="green" /></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="59" type="request"><set><light id="6" color="red" /></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="56" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="60" type="request"><set><light id="7" color="green" /></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="61" type="request"><set><light id="2" color="green" /></set></pcf>
+mai 24, 2015 6:47:55 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="62" type="request"><set><light id="3" color="red" /></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="56" type = "answer"><info status="ok">Switch 2 is set to canton: 6</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="57" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="58" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="59" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="60" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="61" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="62" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="62" type = "request"><up><capteur id="7" type="canton"/></up></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="63" type="request"><set><switch id="3" pos="0"/></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="64" type="request"><set><light id="2" color="red" /></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="65" type="request"><set><light id="6" color="green" /></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="66" type="request"><set><light id="9" color="green" /></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="67" type="request"><set><light id="7" color="red" /></set></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="63" type = "answer"><info status="ok">Switch 3 is set to canton: 7</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="64" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="65" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="66" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:56 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="67" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:47:58 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="67" type = "request"><up><capteur id="3" type="canton"/></up></pcf>
+mai 24, 2015 6:47:58 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="68" type="request"><set><train id="3" action="stop" direction="forward" /></set></pcf>
+mai 24, 2015 6:47:58 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="68" type = "answer"><info status="ok">Train action 3 is set to : STOP@@@Train direction 3 is set to : forward@@@Train 3 is set to : STOP@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="68" type = "request"><up><capteur id="4" type="canton"/></up></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="69" type="request"><set><light id="3" color="green" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="70" type="request"><set><light id="4" color="red" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="71" type="request"><set><train id="3" action="start" direction="forward" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="72" type="request"><set><light id="7" color="green" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="73" type="request"><set><light id="2" color="green" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="74" type="request"><set><light id="3" color="red" /></set></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="69" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="70" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="71" type = "answer"><info status="ok">Train action 3 is set to : START@@@Train direction 3 is set to : forward@@@Train 3 is set to : START@@@All trains are set as requested@@@All switches are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="72" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="73" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:48:01 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="74" type = "answer"><info status="ok">All light are set as requested</info></pcf>
+mai 24, 2015 6:48:05 PM trafic.network.ClientThread readAnswer
+INFOS: Received : <pcf reqid="74" type = "request"><up><capteur id="5" type="canton"/></up></pcf>
+mai 24, 2015 6:48:05 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="75" type="request"><set><switch id="1" pos="0"/></set></pcf>
+mai 24, 2015 6:48:05 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="76" type="request"><set><light id="4" color="green" /></set></pcf>
+mai 24, 2015 6:48:05 PM trafic.network.ClientThread send
+INFOS: Sent : <pcf reqid="77" type="request"><set><light id="5" color="red" /></set></pcf>
